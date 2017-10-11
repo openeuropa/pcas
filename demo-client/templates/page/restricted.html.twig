@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<p>Some parts of this page are only available to logged-in users.</p>
+<p>Log in or out to spot the differences.</p>
+
+{% if auth %}
+<div class="card">
+    <h4 class="card-title">Congratulations</h4>
+    <img class="card-img-top" src="http://placekitten.com/g/400/400" alt="Card image cap"/>
+    <p class="card-text">This image is only available to authenticated users.</p>
+</div>
+{% endif %}
+{% endblock %}

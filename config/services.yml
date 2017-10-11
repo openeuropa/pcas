@@ -1,0 +1,64 @@
+parameters:
+  logger_startup_message: 'Logger just got started!!! (from original config)'
+  protocol:
+    version: 2
+    login:
+      uri: http://127.0.0.1:8000/login
+      query: []
+      allowed_parameters:
+        - service
+        - renew
+        - gateway
+    servicevalidate:
+      uri: http://127.0.0.1:8000/serviceValidate
+      query: []
+      allowed_parameters:
+        - service
+        - ticket
+        - pgtUrl
+        - renew
+        - format
+    logout:
+      uri: http://127.0.0.1:8000/logout
+      query: []
+      allowed_parameters:
+        - service
+
+services:
+  pcas:
+    class: drupol\pcas\PCas
+
+  pcas.httpclient:
+    class: drupol\pcas\Http\Client
+
+  pcas.session:
+    class: Symfony\Component\HttpFoundation\Session\Session
+    arguments: ['@session_storage', '@attribute_bags', '@flash_bag']
+
+  pcas.protocol:
+    class: drupol\pcas\Cas\Protocol\V2\CasProtocolV2
+
+  pcas.logger:
+    class: Psr\Log\NullLogger
+
+  pcas.serializer:
+    class: Symfony\Component\Serializer\Serializer
+    arguments: [['@pcas.objectnormalizer'], ['@pcas.jsonencoder', '@pcas.xmlencoder']]
+
+  pcas.xmlencoder:
+    class: Symfony\Component\Serializer\Encoder\XmlEncoder
+
+  pcas.jsonencoder:
+    class: Symfony\Component\Serializer\Encoder\JsonEncoder
+
+  pcas.objectnormalizer:
+    class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+
+  session_storage:
+    class: Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage
+
+  attribute_bags:
+    class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
+
+  flash_bag:
+    class: Symfony\Component\HttpFoundation\Session\Flash\FlashBag

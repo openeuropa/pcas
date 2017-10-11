@@ -1,0 +1,7 @@
+<cas:serviceResponse xmlns:cas='http://www.yale.edu/tp/cas'>
+    <cas:authenticationSuccess>
+        {% for key, value in parameters %}
+            <cas:{{ key }}>{{ value }}</cas:{{ key }}>
+        {% endfor %}
+    </cas:authenticationSuccess>
+</cas:serviceResponse>
