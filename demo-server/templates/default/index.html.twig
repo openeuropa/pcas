@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if users %}
+        <p>
+            <button class="btn btn-success btn-lg btn-block" type="button" data-toggle="collapse" data-target="#users" aria-expanded="false" aria-controls="users">
+                Logged in users
+            </button>
+        </p>
+        <div id="users" class="collapse show">
+            <div class="card card-body">
+                <p>{{ dump(users) }}</p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
