@@ -42,11 +42,7 @@ class PCasGuardAuthenticator extends AbstractGuardAuthenticator
      */
     public function getCredentials(Request $request)
     {
-        $return = null;
-
-        if ($request->query->has('ticket')) {
-            $this->pcas->validateServiceTicket($request->query->get('ticket'));
-        }
+        $this->pcas->validateServiceTicket($request->query->get('ticket'));
 
         return $this->pcas->getAuthenticatedUser();
     }
@@ -107,5 +103,16 @@ class PCasGuardAuthenticator extends AbstractGuardAuthenticator
     public function supportsRememberMe()
     {
         return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function supports(Request $request) {
+      if ($request->query->has('ticket')) {
+        return true;
+      }
+
+      return false;
     }
 }

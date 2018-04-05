@@ -37,6 +37,7 @@ services:
 
   pcas.protocol:
     class: drupol\pcas\Cas\Protocol\V2\CasProtocolV2
+    public: true
 
   pcas.logger:
     class: Psr\Log\NullLogger
@@ -44,6 +45,7 @@ services:
   pcas.serializer:
     class: Symfony\Component\Serializer\Serializer
     arguments: [['@pcas.objectnormalizer'], ['@pcas.jsonencoder', '@pcas.xmlencoder']]
+    public: true
 
   pcas.xmlencoder:
     class: Symfony\Component\Serializer\Encoder\XmlEncoder

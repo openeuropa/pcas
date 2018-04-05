@@ -5,12 +5,10 @@ security:
         ecas:
             id: pcas.PCasUserProvider
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
         main:
             anonymous: ~
             guard:
+              provider: ecas
               authenticators:
                   - pcas.PCasGuardAuthenticator
 

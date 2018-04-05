@@ -32,9 +32,6 @@
     "guzzlehttp/psr7": {
         "version": "1.4.2"
     },
-    "paragonie/random_compat": {
-        "version": "v2.0.11"
-    },
     "php-http/client-common": {
         "version": "v1.6.0"
     },
@@ -81,9 +78,6 @@
         }
     },
     "symfony/cache": {
-        "version": "v3.3.11"
-    },
-    "symfony/class-loader": {
         "version": "v3.3.11"
     },
     "symfony/config": {
@@ -158,16 +152,7 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.6.0"
     },
-    "symfony/polyfill-php56": {
-        "version": "v1.6.0"
-    },
-    "symfony/polyfill-php70": {
-        "version": "v1.6.0"
-    },
     "symfony/polyfill-php72": {
-        "version": "v1.6.0"
-    },
-    "symfony/polyfill-util": {
         "version": "v1.6.0"
     },
     "symfony/process": {
