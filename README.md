@@ -30,10 +30,10 @@ Then run the web app:
 ```
 cd demo-client
 composer install
-php bin/console server:run 127.0.0.1:8001
+php bin/console server:run 127.0.0.1:8000
 ```
 
-Then go on [http://127.0.0.1:8001](http://127.0.0.1:8001).
+Then go on [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ## Run the tests
 
