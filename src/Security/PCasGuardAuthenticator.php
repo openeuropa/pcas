@@ -110,7 +110,7 @@ class PCasGuardAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request)
     {
-        if ($request->query->has('ticket')) {
+        if ($request->query->has('ticket') || $this->pcas->isAuthenticated()) {
             return true;
         }
 
