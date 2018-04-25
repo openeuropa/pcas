@@ -1,4 +1,4 @@
-[![Build Status](https://www.travis-ci.org/drupol/pcas.svg?branch=master)](https://www.travis-ci.org/drupol/pcas)
+[![Build Status](https://www.travis-ci.org/openeuropa/pcas.svg?branch=master)](https://www.travis-ci.org/openeuropa/pcas)
 
 # pCAS library
 
@@ -7,7 +7,7 @@ pCAS, a CAS library for PHP.
 ## Installation
 
 ```bash
-composer require drupol/pcas
+composer require openeuropa/pcas
 ```
 
 ## Demo
