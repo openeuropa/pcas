@@ -22,7 +22,7 @@ In order to test pCAS library, you must run the server:
 ```
 cd demo-server
 composer install
-php bin/console server:run 127.0.1.1:8001
+php bin/console server:run 127.0.0.1:8001
 ```
 
 Then run the web app:
