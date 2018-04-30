@@ -3,7 +3,7 @@
     "license": "proprietary",
     "require": {
         "php": "^7.0.8",
-        "drupol/pcas": "dev-master",
+        "OpenEuropa/pcas": "dev-master",
         "php-http/guzzle6-adapter": "^1.1",
         "sensio/framework-extra-bundle": "^5.0",
         "symfony/console": "^4.0",

@@ -1,7 +1,7 @@
 <?php
-namespace spec\drupol\pcas;
+namespace spec\OpenEuropa\pcas;
 
-use drupol\pcas\PCas;
+use OpenEuropa\pcas\PCas;
 use PhpSpec\ObjectBehavior;
 use Psr\Http\Message\ResponseInterface;
 

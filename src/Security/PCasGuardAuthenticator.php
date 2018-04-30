@@ -1,7 +1,7 @@
 <?php
-namespace drupol\pcas\Security;
+namespace OpenEuropa\pcas\Security;
 
-use drupol\pcas\PCas;
+use OpenEuropa\pcas\PCas;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,14 +16,14 @@ class PCasGuardAuthenticator extends AbstractGuardAuthenticator
     /**
      * The PCas library.
      *
-     * @var \drupol\pcas\PCas
+     * @var \OpenEuropa\pcas\PCas
      */
     private $pcas;
 
     /**
      * PCasGuardAuthenticator constructor.
      *
-     * @param \drupol\pcas\PCas $pcas
+     * @param \OpenEuropa\pcas\PCas $pcas
      */
     public function __construct(PCas $pcas)
     {

@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use drupol\pcas\Utils\GlobalVariablesGetter;
+use OpenEuropa\pcas\Utils\GlobalVariablesGetter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +14,7 @@ class LogoutController extends DefaultController
      */
     public function indexAction(Request $request)
     {
-        /** @var \drupol\pcas\PCas $pCas */
+        /** @var \OpenEuropa\pcas\PCas $pCas */
         $pCas = $this->container->get('pcas');
 
         $query['service'] = $this->generateUrl(

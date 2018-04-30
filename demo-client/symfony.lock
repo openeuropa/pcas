@@ -20,7 +20,7 @@
     "doctrine/lexer": {
         "version": "v1.0.1"
     },
-    "drupol/pcas": {
+    "OpenEuropa/pcas": {
         "version": "dev-master"
     },
     "guzzlehttp/guzzle": {
