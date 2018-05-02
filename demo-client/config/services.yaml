@@ -55,9 +55,8 @@ services:
         arguments: ['%pcas%']
         public: true
         calls:
-            - method: setSession
-              arguments:
-                  - '@session'
+            - [setSession, ['@?session']]
+            - [setLogger, ['@?pcas.logger']]
 
     pcas.PCasGuardAuthenticator:
           class: OpenEuropa\pcas\Security\PCasGuardAuthenticator

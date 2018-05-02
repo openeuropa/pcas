@@ -27,7 +27,7 @@ class LoginController extends Controller
             $user = $request->getSession()->get('user');
         }
 
-        if ('false' == $request->get('renew', 'false') || is_null($user) || !isset($users[$user])) {
+        if ('true' === $request->get('renew', 'false') || is_null($user) || !isset($users[$user])) {
             $form = $this->createFormBuilder()
                 ->add('user', TextType::class)
                 ->add('nickname', TextType::class)
@@ -54,7 +54,7 @@ class LoginController extends Controller
             $query = array_merge($query, $form->getData());
             $user = $request->getSession()->get('user');
 
-            if ('false' == $request->get('renew', 'false') || is_null($user) || !isset($users[$user])) {
+            if ('true' === $request->get('renew', 'false') || is_null($user) || !isset($users[$user])) {
                 $users[$query['ticket']] = [
                     'data' => $form->getData(),
                     'auth' => 0,

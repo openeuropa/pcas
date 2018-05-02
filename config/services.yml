@@ -27,7 +27,10 @@ parameters:
 services:
   pcas:
     class: OpenEuropa\pcas\PCas
-    shared: true
+    calls:
+        - [setSession, ['@?session']]
+        - [setLogger, ['@?pcas.logger']]
+        - [setHttpClient, ['@?pcas.httpclient']]
 
   pcas.httpclient:
     class: OpenEuropa\pcas\Http\Client

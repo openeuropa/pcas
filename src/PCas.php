@@ -94,9 +94,6 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
             $this->logger = $this->container->get('pcas.logger');
         }
 
-        $this->session = $this->container->get('pcas.sessionfactory')
-            ->createSession();
-
         if ($this->container->has('pcas.httpclient')) {
             $this->httpClient = $this->container->get('pcas.httpclient');
         }
@@ -168,6 +165,8 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     {
         return $this->session;
     }
+
+
 
     /**
      * Set the cache.
@@ -327,7 +326,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
         $this->clearQueryParameter('gateway');
 
         if (!$this->isAuthenticated()) {
-            $response = $this->getContainer()->get('pcas.httpclient')->redirect($this->loginUrl($query));
+            $response = $this->getHttpClient()->redirect($this->loginUrl($query));
         }
 
         return $response;
@@ -364,7 +363,8 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
         $was = ('false' === $this->getQueryParameter('renew', 'false')) ? false : true;
 
         if (!$this->isAuthenticated(!$was)) {
-            $response = $this->getContainer()->get('pcas.httpclient')->redirect($this->loginUrl($query));
+            //$this->setQueryParameter('renew', 'false');
+            $response = $this->getHttpClient()->redirect($this->loginUrl($query));
         }
 
         return $response;
@@ -392,7 +392,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
 
         if (!$wasGateway && !$this->isAuthenticated()) {
             $this->setQueryParameter('gateway', 'true');
-            $response = $this->getContainer()->get('pcas.httpclient')->redirect($this->loginUrl($query));
+            $response = $this->getHttpClient()->redirect($this->loginUrl($query));
         }
 
         return $response;
@@ -415,7 +415,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
 
         if ($this->isAuthenticated()) {
             if ($this->getSession()->invalidate()) {
-                $response = $this->getContainer()->get('pcas.httpclient')->redirect($this->logoutUrl($query));
+                $response = $this->getHttpClient()->redirect($this->logoutUrl($query));
             }
         }
 
@@ -450,7 +450,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
             $this->setQueryParameter('renew', 'true');
             $this->authenticated = false;
         } elseif (!$this->authenticated && $this->getAuthenticatedUser()) {
-            $this->clearQueryParameter('renew');
+            $this->setQueryParameter('renew', 'false');
             $this->authenticated = true;
         }
 
@@ -493,6 +493,27 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
         }
 
         return $validated;
+    }
+
+    /**
+     * Get the HTTP client.
+     *
+     * @return \Http\Client\HttpClient
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
+    }
+
+    /**
+     * Set the HTTP client.
+     *
+     * @param \Http\Client\HttpClient $httpClient
+     *   The HTTP client.
+     */
+    public function setHttpClient(\Http\Client\HttpClient $httpClient)
+    {
+        $this->httpClient = $httpClient;
     }
 
     /**

@@ -1,4 +1,7 @@
 {
+    "OpenEuropa/pcas": {
+        "version": "dev-master"
+    },
     "clue/stream-filter": {
         "version": "v1.4.0"
     },
@@ -19,9 +22,6 @@
     },
     "doctrine/lexer": {
         "version": "v1.0.1"
-    },
-    "OpenEuropa/pcas": {
-        "version": "dev-master"
     },
     "guzzlehttp/guzzle": {
         "version": "6.3.0"
