@@ -94,10 +94,8 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
             $this->logger = $this->container->get('pcas.logger');
         }
 
-        if ($this->container->has('pcas.session')) {
-            $this->session = $this->container->get('pcas.sessionfactory')
-                ->createSession();
-        }
+        $this->session = $this->container->get('pcas.sessionfactory')
+            ->createSession();
 
         if ($this->container->has('pcas.httpclient')) {
             $this->httpClient = $this->container->get('pcas.httpclient');
@@ -152,7 +150,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
      *
      * @return $this
      */
-    public function setSession(SessionInterface $session = null)
+    public function setSession(SessionInterface $session)
     {
         $this->session = $session;
 
@@ -167,15 +165,6 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
      */
     public function getSession()
     {
-        if (null === $this->session) {
-            $request = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
-            if ($session = $request->getSession()) {
-                $this->session = $session;
-            } else {
-                $this->session = $this->getContainer()->get('pcas.sessionfactory')->createSession();
-            }
-        }
-
         return $this->session;
     }
 
@@ -375,6 +364,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
 
         if (!$this->isAuthenticated(!$was)) {
             $response = $this->getContainer()->get('pcas.httpclient')->redirect($this->loginUrl($query));
+            $this->clearQueryParameter('renew');
         }
 
         return $response;
@@ -460,7 +450,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
             $this->setQueryParameter('renew', 'true');
             $this->authenticated = false;
         } elseif (!$this->authenticated && $this->getAuthenticatedUser()) {
-            $this->setQueryParameter('renew', 'false');
+            $this->clearQueryParameter('renew');
             $this->authenticated = true;
         }
 

@@ -27,6 +27,7 @@ parameters:
 services:
   pcas:
     class: OpenEuropa\pcas\PCas
+    shared: true
 
   pcas.httpclient:
     class: OpenEuropa\pcas\Http\Client

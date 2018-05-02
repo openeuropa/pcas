@@ -54,6 +54,10 @@ services:
         class: OpenEuropa\pcas\PCas
         arguments: ['%pcas%']
         public: true
+        calls:
+            - method: setSession
+              arguments:
+                  - '@session'
 
     pcas.PCasGuardAuthenticator:
           class: OpenEuropa\pcas\Security\PCasGuardAuthenticator

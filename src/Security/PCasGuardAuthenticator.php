@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
@@ -43,8 +44,9 @@ class PCasGuardAuthenticator extends AbstractGuardAuthenticator
     public function getCredentials(Request $request)
     {
         $this->pcas->validateServiceTicket($request->query->get('ticket'));
+        $pCasUser = $this->pcas->getAuthenticatedUser();
 
-        return $this->pcas->getAuthenticatedUser();
+        return new User($pCasUser->getUsername(), '');
     }
 
     /**
