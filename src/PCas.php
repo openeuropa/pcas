@@ -125,6 +125,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
             $this->protocol = $this->getContainer()->get('pcas.protocol');
         }
         $this->protocol->setContainer($this->getContainer());
+        $this->protocol->setSession($this->getSession());
 
         return $this->protocol;
     }
@@ -360,11 +361,10 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     public function renewLogin(array $query = [])
     {
         $response = null;
-        $was = ('false' !== $this->getQueryParameter('renew', 'false'));
+        $was = ('false' === $this->getQueryParameter('renew', 'false')) ? false : true;
 
         if (!$this->isAuthenticated(!$was)) {
             $response = $this->getContainer()->get('pcas.httpclient')->redirect($this->loginUrl($query));
-            $this->clearQueryParameter('renew');
         }
 
         return $response;

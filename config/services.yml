@@ -32,13 +32,9 @@ services:
   pcas.httpclient:
     class: OpenEuropa\pcas\Http\Client
 
-  pcas.session:
-    class: Symfony\Component\HttpFoundation\Session\Session
-    public: true
-
   pcas.protocol:
     class: OpenEuropa\pcas\Cas\Protocol\V2\CasProtocolV2
-    arguments: ['@pcas.userfactory', '@pcas.serializerfactory', '@pcas.sessionfactory']
+    arguments: ['@pcas.userfactory', '@pcas.serializerfactory']
     public: true
 
   pcas.logger:

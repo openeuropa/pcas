@@ -9,6 +9,9 @@ use Symfony\Component\Serializer\Serializer;
 
 class PCasSerializerFactory implements PCasSerializerFactoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function createSerializer()
     {
         return new Serializer(

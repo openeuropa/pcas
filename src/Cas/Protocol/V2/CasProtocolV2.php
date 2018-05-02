@@ -29,15 +29,15 @@ class CasProtocolV2 extends AbstractCasProtocol
 
         $query = [
             'ticket'  => $serviceTicket,
-            'service' => $this->getContainer()->get('pcas.protocol')->currentUrl($url)->__toString(),
+            'service' => $this->currentUrl($url)->__toString(),
         ];
 
-        $query += (array) $this->getContainer()->get('pcas.session')->get('pcas/query');
+        $query += (array) $this->getSession()->get('pcas/query');
 
         /** @var ResponseInterface $response */
         $response = $this->getContainer()->get('pcas.httpclient')->request(
             'get',
-            $this->getContainer()->get('pcas.protocol')->get('servicevalidate', $query)
+            $this->get('servicevalidate', $query)
         );
 
         if (200 === $response->getStatusCode()) {
@@ -82,7 +82,7 @@ class CasProtocolV2 extends AbstractCasProtocol
                 */
             }
 
-            $this->getContainer()->get('pcas.session')->set('pcas/user', $pCasUser);
+            $this->getSession()->set('pcas/user', $pCasUser);
 
             return true;
         }

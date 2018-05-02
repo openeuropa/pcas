@@ -46,7 +46,9 @@ class PCasGuardAuthenticator extends AbstractGuardAuthenticator
         $this->pcas->validateServiceTicket($request->query->get('ticket'));
         $pCasUser = $this->pcas->getAuthenticatedUser();
 
-        return new User($pCasUser->getUsername(), '');
+        $user = new User($pCasUser->getUsername(), '', $pCasUser->getRoles());
+
+        return $user;
     }
 
     /**

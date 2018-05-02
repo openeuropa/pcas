@@ -5,10 +5,10 @@ use Http\Discovery\UriFactoryDiscovery;
 use Http\Message\UriFactory;
 use OpenEuropa\pcas\Security\Core\User\PCasUserFactoryInterface;
 use OpenEuropa\pcas\Utils\PCasSerializerFactoryInterface;
-use OpenEuropa\pcas\Utils\PCasSessionFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Class AbstractCasProtocol.
@@ -39,11 +39,11 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
     protected $serializerFactory;
 
     /**
-     * The session factory.
+     * The session.
      *
-     * @var \OpenEuropa\pcas\Utils\PCasSessionFactoryInterface
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
-    protected $sessionFactory;
+    protected $session;
 
     /**
      * AbstractCasProtocol constructor.
@@ -52,21 +52,42 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
      *   The user factory.
      * @param \OpenEuropa\pcas\Utils\PCasSerializerFactoryInterface $serializerFactory
      *   The serializer factory.
-     * @param \OpenEuropa\pcas\Utils\PCasSessionFactoryInterface $sessionFactory
-     *   The session factory.
      * @param \Http\Message\UriFactory|NULL $uriFactory
      *   The URI factory.
      */
     public function __construct(
         PCasUserFactoryInterface $PCasUserFactory,
         PCasSerializerFactoryInterface $serializerFactory,
-        PCasSessionFactoryInterface $sessionFactory,
         UriFactory $uriFactory = null
     ) {
         $this->uriFactory = $uriFactory ?? UriFactoryDiscovery::find();
         $this->userFactory = $PCasUserFactory;
         $this->serializerFactory = $serializerFactory;
-        $this->sessionFactory = $sessionFactory;
+    }
+
+    /**
+     * Set the session.
+     *
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface|null $session
+     *
+     * @return $this
+     */
+    public function setSession(SessionInterface $session)
+    {
+        $this->session = $session;
+
+        return $this;
+    }
+
+    /**
+     * Returns the session namespace or the named session member.
+     *
+     * @return \Symfony\Component\HttpFoundation\Session\Session|\Symfony\Component\HttpFoundation\Session\SessionInterface
+     *   The session.
+     */
+    public function getSession()
+    {
+        return $this->session;
     }
 
     /**
@@ -120,7 +141,7 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
         $query += $properties['protocol'][$name]['query'];
         $query += ['service' => ''];
         $query['service'] = $this->currentUrl($query['service'])->__toString();
-        $query += (array) $this->getContainer()->get('pcas.session')->get('pcas/query');
+        $query += (array) $this->getSession()->get('pcas/query');
 
         // Make sure that every query parameters is a string.
         $query = array_map(function ($value) {
