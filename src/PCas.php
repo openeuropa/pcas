@@ -95,7 +95,8 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
         }
 
         if ($this->container->has('pcas.session')) {
-            $this->session = $this->container->get('pcas.session');
+            $this->session = $this->container->get('pcas.sessionfactory')
+                ->createSession();
         }
 
         if ($this->container->has('pcas.httpclient')) {
@@ -122,7 +123,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
      */
     public function getProtocol()
     {
-        if (is_null($this->protocol)) {
+        if (null === $this->protocol) {
             $this->protocol = $this->getContainer()->get('pcas.protocol');
         }
         $this->protocol->setContainer($this->getContainer());
@@ -161,17 +162,17 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     /**
      * Returns the session namespace or the named session member.
      *
-     * @return null|\Symfony\Component\HttpFoundation\Session\Session|\Symfony\Component\HttpFoundation\Session\SessionInterface
+     * @return \Symfony\Component\HttpFoundation\Session\Session|\Symfony\Component\HttpFoundation\Session\SessionInterface
      *   The session.
      */
     public function getSession()
     {
-        if (is_null($this->session)) {
+        if (null === $this->session) {
             $request = \Symfony\Component\HttpFoundation\Request::createFromGlobals();
             if ($session = $request->getSession()) {
                 $this->session = $session;
             } else {
-                $this->session = $this->getContainer()->get('pcas.session');
+                $this->session = $this->getContainer()->get('pcas.sessionfactory')->createSession();
             }
         }
 
@@ -239,7 +240,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
      */
     public function getLogger()
     {
-        if (is_null($this->logger)) {
+        if (null === $this->logger) {
             $this->logger = new NullLogger();
         }
 
@@ -370,8 +371,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     public function renewLogin(array $query = [])
     {
         $response = null;
-
-        $was = ('false' == $this->getQueryParameter('renew', 'false')) ? false: true;
+        $was = ('false' !== $this->getQueryParameter('renew', 'false'));
 
         if (!$this->isAuthenticated(!$was)) {
             $response = $this->getContainer()->get('pcas.httpclient')->redirect($this->loginUrl($query));
@@ -487,11 +487,11 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
      */
     public function validateServiceTicket($serviceTicket = null, $requestPgt = false, $url = null)
     {
-        if (is_null($serviceTicket)) {
+        if (null === $serviceTicket) {
             $serviceTicket = GlobalVariablesGetter::get('ticket');
         }
 
-        if (empty($url) || is_null($url)) {
+        if (null === $url) {
             $url = $this->getDefaultService();
         }
 

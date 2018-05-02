@@ -1,10 +1,10 @@
 {
-  "name": "openeuropa/pcas",
+  "name": "OpenEuropa/pcas",
   "description": "pCas, a PHP CAS library",
   "type": "library",
   "license": "EUPL-1.2",
   "require": {
-    "php" : "^5.6 || ^7.0 || ^7.1",
+    "php" : "^7.0 || ^7.1",
     "ext-simplexml": "*",
     "php-http/httplug": "^1.1",
     "php-http/discovery": "^1.4",

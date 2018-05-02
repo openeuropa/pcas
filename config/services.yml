@@ -37,30 +37,17 @@ services:
 
   pcas.protocol:
     class: OpenEuropa\pcas\Cas\Protocol\V2\CasProtocolV2
+    arguments: ['@pcas.userfactory', '@pcas.serializerfactory', '@pcas.sessionfactory']
     public: true
 
   pcas.logger:
     class: Psr\Log\NullLogger
 
-  pcas.serializer:
-    class: Symfony\Component\Serializer\Serializer
-    arguments: [['@pcas.objectnormalizer'], ['@pcas.jsonencoder', '@pcas.xmlencoder']]
-    public: true
+  pcas.userfactory:
+    class: OpenEuropa\pcas\Security\Core\User\PCasUserFactory
 
-  pcas.xmlencoder:
-    class: Symfony\Component\Serializer\Encoder\XmlEncoder
+  pcas.serializerfactory:
+    class: OpenEuropa\pcas\Utils\PCasSerializerFactory
 
-  pcas.jsonencoder:
-    class: Symfony\Component\Serializer\Encoder\JsonEncoder
-
-  pcas.objectnormalizer:
-    class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
-
-  session_storage:
-    class: Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage
-
-  attribute_bags:
-    class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
-
-  flash_bag:
-    class: Symfony\Component\HttpFoundation\Session\Flash\FlashBag
+  pcas.sessionfactory:
+    class: OpenEuropa\pcas\Utils\PCasSessionFactory

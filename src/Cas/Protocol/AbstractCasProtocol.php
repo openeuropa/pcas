@@ -3,6 +3,9 @@ namespace OpenEuropa\pcas\Cas\Protocol;
 
 use Http\Discovery\UriFactoryDiscovery;
 use Http\Message\UriFactory;
+use OpenEuropa\pcas\Security\Core\User\PCasUserFactoryInterface;
+use OpenEuropa\pcas\Utils\PCasSerializerFactoryInterface;
+use OpenEuropa\pcas\Utils\PCasSessionFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,14 +25,48 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
     protected $uriFactory;
 
     /**
+     * The user factory.
+     *
+     * @var \OpenEuropa\pcas\Security\Core\User\PCasUserFactoryInterface
+     */
+    protected $userFactory;
+
+    /**
+     * The serializer factory.
+     *
+     * @var \OpenEuropa\pcas\Utils\PCasSerializerFactoryInterface
+     */
+    protected $serializerFactory;
+
+    /**
+     * The session factory.
+     *
+     * @var \OpenEuropa\pcas\Utils\PCasSessionFactoryInterface
+     */
+    protected $sessionFactory;
+
+    /**
      * AbstractCasProtocol constructor.
      *
+     * @param \OpenEuropa\pcas\Security\Core\User\PCasUserFactoryInterface $PCasUserFactory
+     *   The user factory.
+     * @param \OpenEuropa\pcas\Utils\PCasSerializerFactoryInterface $serializerFactory
+     *   The serializer factory.
+     * @param \OpenEuropa\pcas\Utils\PCasSessionFactoryInterface $sessionFactory
+     *   The session factory.
      * @param \Http\Message\UriFactory|NULL $uriFactory
      *   The URI factory.
      */
-    public function __construct(UriFactory $uriFactory = null)
-    {
-        $this->uriFactory = is_null($uriFactory) ? UriFactoryDiscovery::find() : $uriFactory;
+    public function __construct(
+        PCasUserFactoryInterface $PCasUserFactory,
+        PCasSerializerFactoryInterface $serializerFactory,
+        PCasSessionFactoryInterface $sessionFactory,
+        UriFactory $uriFactory = null
+    ) {
+        $this->uriFactory = $uriFactory ?? UriFactoryDiscovery::find();
+        $this->userFactory = $PCasUserFactory;
+        $this->serializerFactory = $serializerFactory;
+        $this->sessionFactory = $sessionFactory;
     }
 
     /**
