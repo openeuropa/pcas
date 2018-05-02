@@ -47,8 +47,8 @@ class CasProtocolV2 extends AbstractCasProtocol
             if (false === $validatedResponse) {
                 return false;
             }
-            $pCasUser = $$validatedResponse;
-            
+            $pCasUser = $validatedResponse;
+
 
             //check if a ProxyGrantingTicketIOU was set
             if ($requestPgt
