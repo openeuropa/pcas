@@ -1,5 +1,5 @@
 <?php
-namespace drupol\pcas\Security\Core\User;
+namespace OpenEuropa\pcas\Security\Core\User;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 

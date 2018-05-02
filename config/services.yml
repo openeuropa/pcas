@@ -26,17 +26,17 @@ parameters:
 
 services:
   pcas:
-    class: drupol\pcas\PCas
+    class: OpenEuropa\pcas\PCas
 
   pcas.httpclient:
-    class: drupol\pcas\Http\Client
+    class: OpenEuropa\pcas\Http\Client
 
   pcas.session:
     class: Symfony\Component\HttpFoundation\Session\Session
     arguments: ['@session_storage', '@attribute_bags', '@flash_bag']
 
   pcas.protocol:
-    class: drupol\pcas\Cas\Protocol\V2\CasProtocolV2
+    class: OpenEuropa\pcas\Cas\Protocol\V2\CasProtocolV2
     public: true
 
   pcas.logger:

@@ -1,5 +1,5 @@
 <?php
-namespace drupol\pcas\Utils;
+namespace OpenEuropa\pcas\Utils;
 
 /**
  * Class UrlUtils.

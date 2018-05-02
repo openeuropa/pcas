@@ -1,5 +1,5 @@
 <?php
-namespace drupol\pcas\Cas\Protocol;
+namespace OpenEuropa\pcas\Cas\Protocol;
 
 interface CasProtocolInterface
 {

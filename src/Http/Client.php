@@ -1,5 +1,5 @@
 <?php
-namespace drupol\pcas\Http;
+namespace OpenEuropa\pcas\Http;
 
 use Http\Client\Common\HttpClientDecorator;
 use Http\Client\Exception\TransferException;

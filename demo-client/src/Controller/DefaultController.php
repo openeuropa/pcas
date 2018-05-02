@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use drupol\pcas\PCas;
+use OpenEuropa\pcas\PCas;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +13,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        /** @var \drupol\pcas\PCas $pCas */
+        /** @var \OpenEuropa\pcas\PCas $pCas */
         $pCas = $this->container->get('pcas');
 
         // replace this example code with whatever you need

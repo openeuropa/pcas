@@ -1,9 +1,9 @@
 <?php
-namespace drupol\pcas\Cas\Protocol\V2;
+namespace OpenEuropa\pcas\Cas\Protocol\V2;
 
-use drupol\pcas\Cas\Protocol\AbstractCasProtocol;
-use drupol\pcas\Security\Core\User\PCasUser;
-use drupol\pcas\Utils\StringUtils;
+use OpenEuropa\pcas\Cas\Protocol\AbstractCasProtocol;
+use OpenEuropa\pcas\Security\Core\User\PCasUser;
+use OpenEuropa\pcas\Utils\StringUtils;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -97,7 +97,7 @@ class CasProtocolV2 extends AbstractCasProtocol
      *
      * @throws \Exception
      *
-     * @return bool|\drupol\pcas\Security\Core\User\PCasUser
+     * @return bool|\OpenEuropa\pcas\Security\Core\User\PCasUser
      */
     private function validateResponse(ResponseInterface $response)
     {

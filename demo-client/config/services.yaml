@@ -51,13 +51,13 @@ services:
         tags: ['controller.service_arguments']
 
     pcas:
-        class: drupol\pcas\PCas
+        class: OpenEuropa\pcas\PCas
         arguments: ['%pcas%']
         public: true
 
     pcas.PCasGuardAuthenticator:
-          class: drupol\pcas\Security\PCasGuardAuthenticator
+          class: OpenEuropa\pcas\Security\PCasGuardAuthenticator
           arguments: ['@pcas']
 
     pcas.PCasUserProvider:
-          class: drupol\pcas\Security\Core\User\PCasUserProvider
+          class: OpenEuropa\pcas\Security\Core\User\PCasUserProvider

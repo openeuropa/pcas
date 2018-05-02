@@ -12,7 +12,7 @@ class LoginController extends DefaultController
      */
     public function indexAction(Request $request)
     {
-        /** @var \drupol\pcas\PCas $pCas */
+        /** @var \OpenEuropa\pcas\PCas $pCas */
         $pCas = $this->container->get('pcas');
 
         $redirect = $this->redirectToRoute('homepage');

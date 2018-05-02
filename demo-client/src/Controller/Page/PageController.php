@@ -2,7 +2,7 @@
 namespace App\Controller\Page;
 
 use App\Controller\DefaultController;
-use drupol\pcas\Utils\GlobalVariablesGetter;
+use OpenEuropa\pcas\Utils\GlobalVariablesGetter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +14,7 @@ class PageController extends DefaultController
      */
     public function pageSimpleAction(Request $request)
     {
-        /** @var \drupol\pcas\PCas $pCas */
+        /** @var \OpenEuropa\pcas\PCas $pCas */
         $pCas = $this->container->get('pcas');
 
         // replace this example code with whatever you need
@@ -28,7 +28,7 @@ class PageController extends DefaultController
      */
     public function pageRestrictedAction(Request $request)
     {
-        /** @var \drupol\pcas\PCas $pCas */
+        /** @var \OpenEuropa\pcas\PCas $pCas */
         $pCas = $this->container->get('pcas');
 
         if ($response = $pCas->login()) {
@@ -48,7 +48,7 @@ class PageController extends DefaultController
      */
     public function pageForceLoginAction(Request $request)
     {
-        /** @var \drupol\pcas\PCas $pCas */
+        /** @var \OpenEuropa\pcas\PCas $pCas */
         $pCas = $this->container->get('pcas');
 
         if ($response = $pCas->renewLogin()) {
@@ -66,7 +66,7 @@ class PageController extends DefaultController
      */
     public function pageGatewayLoginAction(Request $request)
     {
-        /** @var \drupol\pcas\PCas $pCas */
+        /** @var \OpenEuropa\pcas\PCas $pCas */
         $pCas = $this->container->get('pcas');
 
         if ($response = $pCas->gatewayAuthentication()) {
@@ -84,7 +84,7 @@ class PageController extends DefaultController
      */
     public function pageForceLogoutAction(Request $request)
     {
-        /** @var \drupol\pcas\PCas $pCas */
+        /** @var \OpenEuropa\pcas\PCas $pCas */
         $pCas = $this->container->get('pcas');
 
         $query = [];

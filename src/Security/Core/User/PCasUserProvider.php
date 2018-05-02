@@ -1,5 +1,5 @@
 <?php
-namespace drupol\pcas\Security\Core\User;
+namespace OpenEuropa\pcas\Security\Core\User;
 
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -45,6 +45,6 @@ class PCasUserProvider implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return 'drupol\pcas\Security\Core\User\PCasUser' === $class;
+        return 'OpenEuropa\pcas\Security\Core\User\PCasUser' === $class;
     }
 }

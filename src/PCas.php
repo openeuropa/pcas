@@ -1,9 +1,9 @@
 <?php
-namespace drupol\pcas;
+namespace OpenEuropa\pcas;
 
-use drupol\pcas\Cas\Protocol\CasProtocolInterface;
-use drupol\pcas\Security\Core\User\PCasUser;
-use drupol\pcas\Utils\GlobalVariablesGetter;
+use OpenEuropa\pcas\Cas\Protocol\CasProtocolInterface;
+use OpenEuropa\pcas\Security\Core\User\PCasUser;
+use OpenEuropa\pcas\Utils\GlobalVariablesGetter;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
@@ -133,7 +133,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     /**
      * Set the CAS protocol object.
      *
-     * @param \drupol\pcas\Cas\Protocol\CasProtocolInterface $protocol
+     * @param \OpenEuropa\pcas\Cas\Protocol\CasProtocolInterface $protocol
      *
      * @return $this
      */
@@ -210,7 +210,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
      * @param array $properties
      *   The properties.
      *
-     * @return \drupol\pcas\PCas
+     * @return \OpenEuropa\pcas\PCas
      */
     public function setProperties(array $properties = [])
     {
@@ -261,7 +261,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     /**
      * Set the current authenticated user in the session.
      *
-     * @param \drupol\pcas\Security\Core\User\PCasUser $user
+     * @param \OpenEuropa\pcas\Security\Core\User\PCasUser $user
      *   The user.
      *
      * @return $this
