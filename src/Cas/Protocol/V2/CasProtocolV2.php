@@ -2,7 +2,6 @@
 namespace OpenEuropa\pcas\Cas\Protocol\V2;
 
 use OpenEuropa\pcas\Cas\Protocol\AbstractCasProtocol;
-use OpenEuropa\pcas\Security\Core\User\PCasUser;
 use OpenEuropa\pcas\Utils\StringUtils;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,13 +40,15 @@ class CasProtocolV2 extends AbstractCasProtocol
             $this->getContainer()->get('pcas.protocol')->get('servicevalidate', $query)
         );
 
-        if (200 == $response->getStatusCode()) {
-            $pCasUser = $this->validateResponse($response);
+        if (200 === $response->getStatusCode()) {
+            $validatedResponse = $this->validateResponse($response);
 
             // @todo: refactor.
-            if (false === $pCasUser) {
+            if (false === $validatedResponse) {
                 return false;
             }
+            $pCasUser = $$validatedResponse;
+            
 
             //check if a ProxyGrantingTicketIOU was set
             if ($requestPgt
@@ -97,12 +98,12 @@ class CasProtocolV2 extends AbstractCasProtocol
      *
      * @throws \Exception
      *
-     * @return bool|\OpenEuropa\pcas\Security\Core\User\PCasUser
+     * @return bool|\OpenEuropa\pcas\Security\Core\User\PCasUserInterface
      */
     private function validateResponse(ResponseInterface $response)
     {
-        $serializer = $this->getContainer()->get('pcas.serializer');
-        $root = $serializer->decode($response->getBody()->__toString(), 'xml');
+        $root = $this->serializerFactory->createSerializer()
+            ->decode($response->getBody()->__toString(), 'xml');
 
         if (false === $root) {
             // @todo: log
@@ -116,6 +117,7 @@ class CasProtocolV2 extends AbstractCasProtocol
         }
 
         // @todo: log
-        return new PCasUser($root['cas:authenticationSuccess']);
+        return $this->userFactory
+            ->createUser($root['cas:authenticationSuccess']);
     }
 }

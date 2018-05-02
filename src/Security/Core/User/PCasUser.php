@@ -1,12 +1,10 @@
 <?php
 namespace OpenEuropa\pcas\Security\Core\User;
 
-use Symfony\Component\Security\Core\User\UserInterface;
-
 /**
  * Class PCasUser.
  */
-class PCasUser implements UserInterface
+class PCasUser implements PCasUserInterface
 {
     /**
      * The user storage.
@@ -30,7 +28,7 @@ class PCasUser implements UserInterface
      */
     public function __toString()
     {
-        return $this->getUsername();
+        return $this->getUsername() ?? '';
     }
 
     /**
@@ -45,30 +43,6 @@ class PCasUser implements UserInterface
         }
 
         return [];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPassword()
-    {
-        // Not implemented.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSalt()
-    {
-        // Not implemented.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function eraseCredentials()
-    {
-        // Not implemented.
     }
 
     /**
