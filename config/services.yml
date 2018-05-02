@@ -33,7 +33,6 @@ services:
 
   pcas.session:
     class: Symfony\Component\HttpFoundation\Session\Session
-    arguments: ['@session_storage', '@attribute_bags', '@flash_bag']
 
   pcas.protocol:
     class: OpenEuropa\pcas\Cas\Protocol\V2\CasProtocolV2
