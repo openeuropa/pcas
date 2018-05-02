@@ -33,6 +33,7 @@ services:
 
   pcas.session:
     class: Symfony\Component\HttpFoundation\Session\Session
+    public: true
 
   pcas.protocol:
     class: OpenEuropa\pcas\Cas\Protocol\V2\CasProtocolV2
