@@ -79,7 +79,10 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     public function __construct(array $properties = [])
     {
         $this->container = new ContainerBuilder();
-        $loader = new YamlFileLoader($this->container, new FileLocator(__DIR__ . '/../config'));
+        $loader = new YamlFileLoader(
+            $this->container,
+            new FileLocator(__DIR__ . '/../config')
+        );
         $loader->load('services.yml');
 
         $this->container->setParameter('root_dir', __DIR__ . '/..');
@@ -96,6 +99,10 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
 
         if ($this->container->has('pcas.httpclient')) {
             $this->httpClient = $this->container->get('pcas.httpclient');
+        }
+
+        if ($this->container->has('pcas.protocol')) {
+            $this->protocol = $this->container->get('pcas.protocol');
         }
 
         $this->container->compile();
@@ -118,9 +125,6 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
      */
     public function getProtocol()
     {
-        if (null === $this->protocol) {
-            $this->protocol = $this->getContainer()->get('pcas.protocol');
-        }
         $this->protocol->setContainer($this->getContainer());
         $this->protocol->setSession($this->getSession());
 
@@ -165,8 +169,6 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     {
         return $this->session;
     }
-
-
 
     /**
      * Set the cache.
@@ -498,7 +500,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     /**
      * Get the HTTP client.
      *
-     * @return \Http\Client\HttpClient
+     * @return \OpenEuropa\pcas\Http\PCasHttpClientInterface
      */
     public function getHttpClient()
     {
