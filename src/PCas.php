@@ -2,6 +2,7 @@
 namespace OpenEuropa\pcas;
 
 use OpenEuropa\pcas\Cas\Protocol\CasProtocolInterface;
+use OpenEuropa\pcas\Http\PCasHttpClientInterface;
 use OpenEuropa\pcas\Security\Core\User\PCasUser;
 use OpenEuropa\pcas\Utils\GlobalVariablesGetter;
 use Psr\Log\LoggerAwareInterface;
@@ -81,29 +82,15 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
         $this->container = new ContainerBuilder();
         $loader = new YamlFileLoader(
             $this->container,
-            new FileLocator(__DIR__ . '/../config')
+            new FileLocator(__DIR__ . '/../Resources/config')
         );
-        $loader->load('services.yml');
+        $loader->load('p_cas.yml');
 
-        $this->container->setParameter('root_dir', __DIR__ . '/..');
-        $this->setProperties(
-            array_replace_recursive(
-                $this->container->getParameterBag()->all(),
-                $properties
-            )
-        );
-
-        if ($this->container->has('pcas.logger')) {
-            $this->logger = $this->container->get('pcas.logger');
-        }
-
-        if ($this->container->has('pcas.httpclient')) {
-            $this->httpClient = $this->container->get('pcas.httpclient');
-        }
-
-        if ($this->container->has('pcas.protocol')) {
-            $this->protocol = $this->container->get('pcas.protocol');
-        }
+        $this->setProperties($properties);
+        $this->setLogger($this->container->get('pcas.logger'));
+        $this->setHttpClient($this->container->get('pcas.httpclient'));
+        $this->setProtocol($this->container->get('pcas.protocol'));
+        $this->setSession($this->container->get('pcas.sessionfactory')->createSession());
 
         $this->container->compile();
     }
@@ -127,6 +114,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     {
         $this->protocol->setContainer($this->getContainer());
         $this->protocol->setSession($this->getSession());
+        $this->protocol->setProperties($this->getProperties());
 
         return $this->protocol;
     }
@@ -204,10 +192,9 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
      *
      * @return \OpenEuropa\pcas\PCas
      */
-    public function setProperties(array $properties = [])
+    public function setProperties(array $properties)
     {
-        $this->container->getParameterBag()->clear();
-        $this->container->getParameterBag()->add($properties);
+        $this->properties = $properties;
 
         return $this;
     }
@@ -220,7 +207,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
      */
     public function getProperties()
     {
-        return $this->getContainer()->getParameterBag()->all();
+        return $this->properties;
     }
 
     /**
@@ -365,7 +352,6 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
         $was = ('false' === $this->getQueryParameter('renew', 'false')) ? false : true;
 
         if (!$this->isAuthenticated(!$was)) {
-            //$this->setQueryParameter('renew', 'false');
             $response = $this->getHttpClient()->redirect($this->loginUrl($query));
         }
 
@@ -510,10 +496,10 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     /**
      * Set the HTTP client.
      *
-     * @param \Http\Client\HttpClient $httpClient
+     * @param \OpenEuropa\pcas\Http\PCasHttpClientInterface $httpClient
      *   The HTTP client.
      */
-    public function setHttpClient(\Http\Client\HttpClient $httpClient)
+    public function setHttpClient(PCasHttpClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
     }
@@ -521,7 +507,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     /**
      * Get the default service name.
      *
-     * @param mixed $service
+     * @param string $service
      *
      * @return string
      *   The default service name.

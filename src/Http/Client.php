@@ -52,25 +52,9 @@ class Client implements PCasHttpClientInterface
     }
 
     /**
-     * Perform a request.
-     *
-     * @param string                                $method
-     *   The HTTP method.
-     * @param string|\Psr\Http\Message\UriInterface $url
-     *   The URL.
-     * @param array                                 $headers
-     *   The headers.
-     * @param string|null                           $body
-     *   The body.
-     * @param string                                $protocolVersion
-     *   The protocol version.
-     *
-     * @throws \Exception
-     *
-     * @return \Psr\Http\Message\ResponseInterface
-     *   The response.
+     * {@inheritdoc}
      */
-    public function request($method, $url, array $headers = [], $body = null, $protocolVersion = '1.1')
+    public function request($url, $method = 'GET', array $headers = [], $body = null, $protocolVersion = '1.1')
     {
         $request = $this->messageFactory->createRequest($method, $url, $headers, $body, $protocolVersion);
 

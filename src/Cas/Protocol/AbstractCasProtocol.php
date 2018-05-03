@@ -45,6 +45,8 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
      */
     protected $session;
 
+    protected $properties;
+
     /**
      * AbstractCasProtocol constructor.
      *
@@ -106,7 +108,7 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
      */
     public function getProperties()
     {
-        return $this->getContainer()->getParameterBag()->all();
+        return $this->properties;
     }
 
     /**
@@ -170,5 +172,13 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
 
         return $this->uriFactory->createUri($properties['protocol'][$name]['uri'])
           ->withQuery(http_build_query($query));
+    }
+
+    /**
+     * @param array $properties
+     */
+    public function setProperties(array $properties)
+    {
+        $this->properties = $properties;
     }
 }

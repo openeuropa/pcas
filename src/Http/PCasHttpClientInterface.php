@@ -7,6 +7,27 @@ use Http\Client\HttpClient;
 interface PCasHttpClientInterface extends HttpClient
 {
     /**
+     * Perform a request.
+     *
+     * @param string|\Psr\Http\Message\UriInterface $url
+     *   The URL.
+     * @param string                                $method
+     *   The HTTP method.
+     * @param array                                 $headers
+     *   The headers.
+     * @param string|null                           $body
+     *   The body.
+     * @param string                                $protocolVersion
+     *   The protocol version.
+     *
+     * @throws \Exception
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     *   The response.
+     */
+    public function request($url, $method = 'GET', array $headers = [], $body = null, $protocolVersion = '1.1');
+
+    /**
      * Do a redirection.
      *
      * @param \Psr\Http\Message\UriInterface|string $url

@@ -3,27 +3,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
-    pcas:
-      logger_startup_message: 'Logger just got started!!! (from demo app config)'
-      protocol:
-        login:
-          uri: http://127.0.0.1:8001/login
-        servicevalidate:
-          uri: http://127.0.0.1:8001/serviceValidate
-          query:
-            userDetails: 'true'
-            groups: '*'
-          allowed_parameters:
-            - service
-            - ticket
-            - pgtUrl
-            - renew
-            - format
-            - userDetails
-            - groups
-        logout:
-          uri: http://127.0.0.1:8001/logout
+  locale: en
+
 
 services:
     # default configuration for services in *this* file
@@ -49,14 +30,6 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
-
-    pcas:
-        class: OpenEuropa\pcas\PCas
-        arguments: ['%pcas%']
-        public: true
-        calls:
-            - [setSession, ['@?session']]
-            - [setLogger, ['@?pcas.logger']]
 
     pcas.PCasGuardAuthenticator:
           class: OpenEuropa\pcas\Security\PCasGuardAuthenticator
