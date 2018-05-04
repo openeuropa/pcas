@@ -15,6 +15,7 @@ class DefaultController extends Controller
     {
         /** @var \OpenEuropa\pcas\PCas $pCas */
         $pCas = $this->container->get('pcas');
+        $pCas->setSession($request->getSession());
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [

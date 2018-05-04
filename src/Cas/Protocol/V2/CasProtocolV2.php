@@ -36,7 +36,6 @@ class CasProtocolV2 extends AbstractCasProtocol
 
         /** @var ResponseInterface $response */
         $response = $this->getContainer()->get('pcas.httpclient')->request(
-            'get',
             $this->get('servicevalidate', $query)
         );
 

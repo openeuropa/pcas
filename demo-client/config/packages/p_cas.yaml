@@ -1,0 +1,21 @@
+p_cas:
+  logger_startup_message: 'Logger just got started!!! (from demo app config)'
+  protocol:
+    login:
+      uri: http://127.0.0.1:8001/login
+      allowed_parameters:
+        - service
+        - renew
+        - gateway
+    servicevalidate:
+      uri: http://127.0.0.1:8001/serviceValidate
+      allowed_parameters:
+        - service
+        - ticket
+        - pgtUrl
+        - renew
+        - format
+    logout:
+      uri: http://127.0.0.1:8001/logout
+      allowed_parameters:
+        - service

@@ -14,6 +14,7 @@ class LoginController extends DefaultController
     {
         /** @var \OpenEuropa\pcas\PCas $pCas */
         $pCas = $this->container->get('pcas');
+        $pCas->setSession($request->getSession());
 
         $redirect = $this->redirectToRoute('homepage');
 

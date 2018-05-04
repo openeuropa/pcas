@@ -32,6 +32,9 @@
     "guzzlehttp/psr7": {
         "version": "1.4.2"
     },
+    "openeuropa/pcas": {
+        "version": "dev-master"
+    },
     "php-http/client-common": {
         "version": "v1.6.0"
     },
