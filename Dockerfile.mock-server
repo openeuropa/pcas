@@ -1,0 +1,6 @@
+FROM phpdrone/composer:php72-latest
+ADD demo-server /app
+WORKDIR /app
+EXPOSE 8001
+RUN composer install --ansi && rm -Rf /root/.composer
+ENTRYPOINT [ "php", "/app/bin/console", "server:run", "0.0.0.0:8001" ]

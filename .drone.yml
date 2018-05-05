@@ -1,0 +1,33 @@
+pipeline:
+  composer-install:
+    image: fpfis/php71-dev
+    commands:
+      - composer install --ansi
+    volumes:
+      - /cache:/cache
+
+  grumphp:
+    image: fpfis/php71-dev 
+    commands:
+      - ./vendor/bin/grumphp run --ansi
+
+
+  publish-mock-client:
+    group: docker-image
+    image: plugins/docker
+    repo: openeuropa/pcas-client
+    dockerfile: Dockerfile.mock-client
+    secrets: [ docker_username, docker_password ]
+    when:
+      branch: master
+      event: push
+
+  publish-mock-server:
+    group: docker-image
+    image: plugins/docker
+    repo: openeuropa/pcas-server
+    dockerfile: Dockerfile.mock-server
+    secrets: [ docker_username, docker_password ]
+    when:
+      branch: master
+      event: push
