@@ -2,6 +2,8 @@
 namespace OpenEuropa\pcas\Http;
 
 use Http\Client\Common\HttpClientDecorator;
+use Http\Client\Common\Plugin\HeaderSetPlugin;
+use Http\Client\Common\PluginClient;
 use Http\Client\Exception\TransferException;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
@@ -46,9 +48,18 @@ class Client implements PCasHttpClientInterface
         MessageFactory $messageFactory = null,
         UriFactory $uriFactory = null
     ) {
-        $this->httpClient = is_null($httpClient) ? HttpClientDiscovery::find() : $httpClient;
-        $this->messageFactory = is_null($messageFactory) ? MessageFactoryDiscovery::find() : $messageFactory;
-        $this->uriFactory = is_null($uriFactory) ? UriFactoryDiscovery::find() : $uriFactory;
+        $this->httpClient = $httpClient ?? HttpClientDiscovery::find();
+        $this->messageFactory = $messageFactory ?? MessageFactoryDiscovery::find();
+        $this->uriFactory = $uriFactory ?? UriFactoryDiscovery::find();
+
+        $headerPlugin = new HeaderSetPlugin([
+            'User-Agent' => 'openeuropa/pcas library'
+        ]);
+
+        $this->httpClient = new PluginClient(
+            $this->httpClient,
+            [$headerPlugin]
+        );
     }
 
     /**
