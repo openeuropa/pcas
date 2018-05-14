@@ -37,3 +37,7 @@ services:
 
     pcas.PCasUserProvider:
           class: OpenEuropa\pcas\Security\Core\User\PCasUserProvider
+
+    pcas.httpclient:
+      class: OpenEuropa\pcas\Http\Client
+      arguments: ['@httplug.client.default']

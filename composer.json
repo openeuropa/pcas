@@ -4,7 +4,7 @@
   "type": "library",
   "license": "EUPL-1.2",
   "require": {
-    "php" : "^7.0 || ^7.1",
+    "php" : "^7.0 || ^7.1 || ^7.2",
     "ext-simplexml": "*",
     "php-http/httplug": "^1.1",
     "php-http/discovery": "^1.4",

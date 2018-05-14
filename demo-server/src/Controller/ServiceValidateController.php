@@ -26,7 +26,7 @@ class ServiceValidateController extends Controller
         if ($user = $request->get('ticket')) {
             if (isset($users[$user])) {
                 // Do not allow multiple use of a ticket.
-                if (0 == $users[$user]['auth']) {
+                if (0 === $users[$user]['auth']) {
                     $parameters = $users[$user]['data'];
                     $users[$user]['auth']++;
                     $cache->set('users', $users);
@@ -35,11 +35,11 @@ class ServiceValidateController extends Controller
         }
 
         if ($parameters) {
-            return $this->render('default/service_validate_success.html.twig', array(
-                'parameters' => $parameters,
-            ));
+            $template = 'default/service_validate_success.html.twig';
         } else {
-            return $this->render('default/service_validate_failure.html.twig');
+            $template = 'default/service_validate_failure.html.twig';
         }
+
+        return $this->render($template, ['parameters' => $parameters]);
     }
 }

@@ -45,4 +45,18 @@ interface PCasHttpClientInterface extends HttpClient
      *   The response.
      */
     public function redirect($url, $replace = true, $code = 302);
+
+    /**
+     * Get the HTTP client.
+     *
+     * @return HttpClient
+     */
+    public function getHttpClient();
+
+    /**
+     * Get the message factory.
+     *
+     * @return \Http\Message\MessageFactory
+     */
+    public function getMessageFactory();
 }
