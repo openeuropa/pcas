@@ -45,7 +45,7 @@ class PCasSpec extends ObjectBehavior
         $properties = $this->getProperties();
         $url = sprintf('%s?service=%s', $properties['pcas']['protocol']['login']['uri'], urlencode(sprintf('http://%s/', $_SERVER['HTTP_HOST'])));
 
-        $this->getHttpClient()->loginUrl()->__toString()->shouldBe($url);
+        $this->loginUrl()->__toString()->shouldBe($url);
         $this->login()->shouldBeAnInstanceOf(ResponseInterface::class);
         $this->login()->getStatusCode()->shouldBe(302);
     }
@@ -55,7 +55,7 @@ class PCasSpec extends ObjectBehavior
         $properties = $this->getProperties();
         $url = sprintf('%s?service=%s', $properties['pcas']['protocol']['logout']['uri'], urlencode(sprintf('http://%s/', $_SERVER['HTTP_HOST'])));
 
-        $this->getHttpClient()->logoutUrl()->__toString()->shouldBe($url);
+        $this->logoutUrl()->__toString()->shouldBe($url);
         $this->logout()->shouldBeNull();
     }
 }
