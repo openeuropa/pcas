@@ -5,7 +5,7 @@ use OpenEuropa\pcas\PCas;
 use PhpSpec\ObjectBehavior;
 use Psr\Http\Message\ResponseInterface;
 
-class pCasSpec extends ObjectBehavior
+class PCasSpec extends ObjectBehavior
 {
     public function getProperties()
     {
