@@ -140,6 +140,17 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
         $properties = $this->getProperties();
         $name = strtolower($name);
 
+        $properties += [
+            'protocol' => [
+                $name => [],
+            ],
+        ];
+
+        $properties['protocol'][$name] += [
+            'query' => [],
+            'allowed_parameters' => [],
+        ];
+
         $query += $properties['protocol'][$name]['query'];
         $query += ['service' => ''];
         $query['service'] = $this->currentUrl($query['service'])->__toString();
@@ -147,7 +158,7 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
 
         // Make sure that every query parameters is a string.
         $query = array_map(function ($value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $value = implode(
                     ',',
                     iterator_to_array(
@@ -160,6 +171,7 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
 
             return $value;
         }, $query);
+
 
         // Remove parameters that are not allowed.
         $query = array_intersect_key(
