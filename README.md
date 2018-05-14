@@ -35,6 +35,15 @@ php bin/console server:run 127.0.0.1:8000
 
 Then go on [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
+You can also test it against ECAS, the authentication service from European Commission by updating the file ```.env``` in
+```demo-client``` directory. If this file doesn't exists, you can create it from ```.env.dist```.
+
+The file must contains:
+
+```
+APP_ENV=ec
+```
+
 ## Run the tests
 
 ```bash
