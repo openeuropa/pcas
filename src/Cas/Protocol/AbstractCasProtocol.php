@@ -3,26 +3,17 @@ namespace OpenEuropa\pcas\Cas\Protocol;
 
 use Http\Discovery\UriFactoryDiscovery;
 use Http\Message\UriFactory;
+use OpenEuropa\pcas\Http\HttpClientInterface;
 use OpenEuropa\pcas\Security\Core\User\PCasUserFactoryInterface;
 use OpenEuropa\pcas\Utils\PCasSerializerFactoryInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Class AbstractCasProtocol.
  */
-abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwareInterface
+abstract class AbstractCasProtocol implements CasProtocolInterface
 {
-    use ContainerAwareTrait;
-
-    /**
-     * The URI factory.
-     *
-     * @var \Http\Message\UriFactory
-     */
-    protected $uriFactory;
 
     /**
      * The user factory.
@@ -39,17 +30,36 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
     protected $serializerFactory;
 
     /**
+     * The protocol properties.
+     *
+     * @var mixed[]
+     */
+    protected $properties;
+    /**
+     * The URI factory.
+     *
+     * @var \Http\Message\UriFactory
+     */
+    private $uriFactory;
+
+    /**
      * The session.
      *
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
-    protected $session;
+    private $session;
 
-    protected $properties;
+    /**
+     * The HTTP client.
+     *
+     * @var \OpenEuropa\pcas\Http\HttpClientInterface
+     */
+    private $client;
 
     /**
      * AbstractCasProtocol constructor.
      *
+     * @param \OpenEuropa\pcas\Http\HttpClientInterface $client
      * @param \OpenEuropa\pcas\Security\Core\User\PCasUserFactoryInterface $PCasUserFactory
      *   The user factory.
      * @param \OpenEuropa\pcas\Utils\PCasSerializerFactoryInterface $serializerFactory
@@ -58,13 +68,15 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
      *   The URI factory.
      */
     public function __construct(
+        HttpClientInterface $client,
         PCasUserFactoryInterface $PCasUserFactory,
         PCasSerializerFactoryInterface $serializerFactory,
         UriFactory $uriFactory = null
     ) {
-        $this->uriFactory = $uriFactory ?? UriFactoryDiscovery::find();
+        $this->client = $client;
         $this->userFactory = $PCasUserFactory;
         $this->serializerFactory = $serializerFactory;
+        $this->uriFactory = $uriFactory ?? UriFactoryDiscovery::find();
     }
 
     /**
@@ -93,22 +105,27 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
     }
 
     /**
-     * Get the container.
-     *
-     * @return \Psr\Container\ContainerInterface
-     *   The container.
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getProperties()
     {
         return $this->properties;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getHttpClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUriFactory()
+    {
+        return $this->uriFactory;
     }
 
     /**
@@ -182,7 +199,7 @@ abstract class AbstractCasProtocol implements CasProtocolInterface, ContainerAwa
             )
         );
 
-        return $this->uriFactory->createUri($properties['protocol'][$name]['uri'])
+        return $this->getUriFactory()->createUri($properties['protocol'][$name]['uri'])
           ->withQuery(http_build_query($query));
     }
 

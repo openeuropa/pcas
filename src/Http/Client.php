@@ -11,7 +11,7 @@ use Http\Message\MessageFactory;
 /**
  * Class Client.
  */
-class Client implements PCasHttpClientInterface
+class Client implements HttpClientInterface
 {
     use HttpClientDecorator;
 

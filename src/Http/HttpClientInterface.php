@@ -4,7 +4,7 @@ namespace OpenEuropa\pcas\Http;
 
 use Http\Client\HttpClient;
 
-interface PCasHttpClientInterface extends HttpClient
+interface HttpClientInterface extends HttpClient
 {
     /**
      * Perform a request.

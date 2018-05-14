@@ -1,6 +1,8 @@
 <?php
 namespace OpenEuropa\pcas\Cas\Protocol;
 
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 interface CasProtocolInterface
 {
     /**
@@ -29,12 +31,19 @@ interface CasProtocolInterface
     public function currentUrl($url = '');
 
     /**
-     * Get the container.
+     * Get the http client.
      *
-     * @return \Psr\Container\ContainerInterface
-     *   The container.
+     * @return \OpenEuropa\pcas\Http\HttpClientInterface
+     *   The http client.
      */
-    public function getContainer();
+    public function getHttpClient();
+
+    /**
+     * Get the URI factory.
+     *
+     * @return \Http\Message\UriFactory|NULL
+     */
+    public function getUriFactory();
 
     /**
      * Get the library properties.
@@ -43,4 +52,22 @@ interface CasProtocolInterface
      *   The properties.
      */
     public function getProperties();
+
+    /**
+     * Set the session.
+     *
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     *
+     * @return mixed
+     */
+    public function setSession(SessionInterface $session);
+
+    /**
+     * Set properties.
+     *
+     * @param array $properties
+     *
+     * @return mixed
+     */
+    public function setProperties(array $properties);
 }

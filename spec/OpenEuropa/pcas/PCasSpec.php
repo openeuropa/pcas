@@ -1,7 +1,12 @@
 <?php
 namespace spec\OpenEuropa\pcas;
 
+use OpenEuropa\pcas\Cas\Protocol\V2\CasProtocolV2;
+use OpenEuropa\pcas\Http\HttpClientFactory;
 use OpenEuropa\pcas\PCas;
+use OpenEuropa\pcas\Security\Core\User\PCasUserFactory;
+use OpenEuropa\pcas\Utils\PCasSerializerFactory;
+use OpenEuropa\pcas\Utils\PCasSessionFactory;
 use PhpSpec\ObjectBehavior;
 use Psr\Http\Message\ResponseInterface;
 
@@ -36,7 +41,22 @@ class PCasSpec extends ObjectBehavior
     public function let()
     {
         $this->setUpClient();
-        $this->beConstructedWith($this->getProperties());
+
+        $client = (new HttpClientFactory())->getHttpClient();
+
+        $protocol = new CasProtocolV2(
+            $client,
+            new PCasUserFactory(),
+            new PCasSerializerFactory());
+
+        $session = (new PCasSessionFactory())->createSession();
+
+        $this->beConstructedWith(
+            $this->getProperties(),
+            $client,
+            $protocol,
+            $session
+        );
     }
 
     public function it_is_initializable()

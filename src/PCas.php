@@ -2,7 +2,7 @@
 namespace OpenEuropa\pcas;
 
 use OpenEuropa\pcas\Cas\Protocol\CasProtocolInterface;
-use OpenEuropa\pcas\Http\PCasHttpClientInterface;
+use OpenEuropa\pcas\Http\HttpClientInterface;
 use OpenEuropa\pcas\Security\Core\User\PCasUser;
 use OpenEuropa\pcas\Utils\GlobalVariablesGetter;
 use Psr\Log\LoggerAwareInterface;
@@ -10,19 +10,13 @@ use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Psr\SimpleCache\CacheInterface;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Class PCas.
  */
-class PCas implements ContainerAwareInterface, LoggerAwareInterface
+class PCas implements LoggerAwareInterface
 {
-    use ContainerAwareTrait;
     use LoggerAwareTrait;
 
     const VERSION = '0.0.1';
@@ -30,7 +24,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     /**
      * The HTTP client.
      *
-     * @var \Http\Client\HttpClient
+     * @var HttpClientInterface
      */
     protected $httpClient;
 
@@ -76,33 +70,28 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
      *
      * @param array $properties
      *   The properties.
+     * @param \OpenEuropa\pcas\Http\HttpClientInterface $client
+     * @param \OpenEuropa\pcas\Cas\Protocol\CasProtocolInterface $protocol
+     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     * @param \Psr\Log\LoggerInterface|null $logger
      */
-    public function __construct(array $properties = [])
-    {
-        $this->container = new ContainerBuilder();
-        $loader = new YamlFileLoader(
-            $this->container,
-            new FileLocator(__DIR__ . '/../Resources/config')
-        );
-        $loader->load('p_cas.yml');
-
+    public function __construct(
+        array $properties,
+        HttpClientInterface $client,
+        CasProtocolInterface $protocol,
+        SessionInterface $session,
+        LoggerInterface $logger = null
+    ) {
         $this->setProperties($properties);
-        $this->setLogger($this->container->get('pcas.logger'));
-        $this->setHttpClient($this->container->get('pcas.httpclient'));
-        $this->setProtocol($this->container->get('pcas.protocol'));
-        $this->setSession($this->container->get('pcas.sessionfactory')->createSession());
 
-        $this->container->compile();
-    }
+        $this->setHttpClient($client);
+        $this->setProtocol($protocol);
+        $this->setSession($session);
 
-    /**
-     * Get the container.
-     *
-     * @return \Symfony\Component\DependencyInjection\ContainerBuilder
-     */
-    public function getContainer()
-    {
-        return $this->container;
+        // @todo: work on this.
+        if ($logger instanceof LoggerInterface) {
+            $this->setLogger($logger);
+        }
     }
 
     /**
@@ -112,7 +101,6 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
      */
     public function getProtocol()
     {
-        $this->protocol->setContainer($this->getContainer());
         $this->protocol->setSession($this->getSession());
         $this->protocol->setProperties($this->getProperties());
 
@@ -486,7 +474,7 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     /**
      * Get the HTTP client.
      *
-     * @return \OpenEuropa\pcas\Http\PCasHttpClientInterface
+     * @return \OpenEuropa\pcas\Http\HttpClientInterface
      */
     public function getHttpClient()
     {
@@ -496,10 +484,10 @@ class PCas implements ContainerAwareInterface, LoggerAwareInterface
     /**
      * Set the HTTP client.
      *
-     * @param \OpenEuropa\pcas\Http\PCasHttpClientInterface $httpClient
+     * @param \OpenEuropa\pcas\Http\HttpClientInterface $httpClient
      *   The HTTP client.
      */
-    public function setHttpClient(PCasHttpClientInterface $httpClient)
+    public function setHttpClient(HttpClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
     }

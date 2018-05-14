@@ -4,12 +4,13 @@
     "require": {
         "php": "^7.1",
         "OpenEuropa/pcas": "dev-master",
-        "php-http/httplug-bundle": "^1.1",
         "php-http/guzzle6-adapter": "^1.1",
+        "php-http/httplug-bundle": "^1.1",
         "sensio/framework-extra-bundle": "^5.0",
         "symfony/console": "^4.0",
         "symfony/debug-bundle": "^4.0",
         "symfony/framework-bundle": "^4.0",
+        "symfony/monolog-bundle": "^3.2",
         "symfony/psr-http-message-bridge": "^1.0",
         "symfony/security-bundle": "^4.0",
         "symfony/twig-bundle": "^4.0",
@@ -19,8 +20,8 @@
         "twig/extensions": "^1.5"
     },
     "require-dev": {
-        "symfony/flex": "^1.0",
-        "symfony/dotenv": "^4.0"
+        "symfony/dotenv": "^4.0",
+        "symfony/flex": "^1.0"
     },
     "config": {
         "preferred-install": {
