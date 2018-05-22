@@ -36,7 +36,7 @@ services:
 
   pcas.protocol:
     class: OpenEuropa\pcas\Cas\Protocol\V2\CasProtocolV2
-    arguments: ['@?pcas.httpclient', '@pcas.userfactory', '@pcas.serializerfactory']
+    arguments: ['@pcas.userfactory', '@pcas.serializerfactory']
     public: true
 
   pcas.session:

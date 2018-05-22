@@ -45,7 +45,6 @@ class PCasSpec extends ObjectBehavior
         $client = (new HttpClientFactory())->getHttpClient();
 
         $protocol = new CasProtocolV2(
-            $client,
             new PCasUserFactory(),
             new PCasSerializerFactory());
 

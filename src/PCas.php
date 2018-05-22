@@ -85,7 +85,11 @@ class PCas implements LoggerAwareInterface
         $this->setProperties($properties);
 
         $this->setHttpClient($client);
-        $this->setProtocol($protocol);
+        $this->setProtocol(
+            $protocol->withHttpClient(
+                $this->getHttpClient()
+            )
+        );
         $this->setSession($session);
 
         // @todo: work on this.
