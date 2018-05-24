@@ -27,7 +27,8 @@
     "phpmd/phpmd": "^2.6",
     "sebastian/phpcpd": "^3.0",
     "sensiolabs/security-checker": "^4.0",
-    "friendsofphp/php-cs-fixer": "^2.9"
+    "friendsofphp/php-cs-fixer": "^2.9",
+    "drupol/phpspec-annotation": "dev-master"
   },
   "autoload": {
     "psr-4": {

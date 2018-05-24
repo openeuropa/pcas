@@ -73,6 +73,7 @@ class PCas implements LoggerAwareInterface
      * @param \OpenEuropa\pcas\Http\HttpClientInterface $client
      * @param \OpenEuropa\pcas\Cas\Protocol\CasProtocolInterface $protocol
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     * @param \Psr\SimpleCache\CacheInterface $cache
      * @param \Psr\Log\LoggerInterface|null $logger
      */
     public function __construct(
@@ -80,6 +81,7 @@ class PCas implements LoggerAwareInterface
         HttpClientInterface $client,
         CasProtocolInterface $protocol,
         SessionInterface $session,
+        CacheInterface $cache = null,
         LoggerInterface $logger = null
     ) {
         $this->setProperties($properties);
@@ -91,6 +93,10 @@ class PCas implements LoggerAwareInterface
             )
         );
         $this->setSession($session);
+
+        if ($cache instanceof CacheInterface) {
+            $this->setCache($cache);
+        }
 
         // @todo: work on this.
         if ($logger instanceof LoggerInterface) {
@@ -227,21 +233,6 @@ class PCas implements LoggerAwareInterface
     public function getAuthenticatedUser()
     {
         return $this->getSession()->get('pcas/user');
-    }
-
-    /**
-     * Set the current authenticated user in the session.
-     *
-     * @param \OpenEuropa\pcas\Security\Core\User\PCasUser $user
-     *   The user.
-     *
-     * @return $this
-     */
-    public function setAuthenticatedUser(PCasUser $user)
-    {
-        $this->getSession()->set('pcas/user', $user);
-
-        return $this;
     }
 
     /**

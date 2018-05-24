@@ -6,9 +6,9 @@ use OpenEuropa\pcas\Http\HttpClientFactory;
 use OpenEuropa\pcas\PCas;
 use OpenEuropa\pcas\Security\Core\User\PCasUserFactory;
 use OpenEuropa\pcas\Utils\PCasSerializerFactory;
-use OpenEuropa\pcas\Utils\PCasSessionFactory;
 use PhpSpec\ObjectBehavior;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class PCasSpec extends ObjectBehavior
 {
@@ -48,7 +48,7 @@ class PCasSpec extends ObjectBehavior
             new PCasUserFactory(),
             new PCasSerializerFactory());
 
-        $session = (new PCasSessionFactory())->createSession();
+        $session = new Session();
 
         $this->beConstructedWith(
             $this->getProperties(),
@@ -58,11 +58,17 @@ class PCasSpec extends ObjectBehavior
         );
     }
 
+    /**
+     * @name I can initialize it.
+     */
     public function it_is_initializable()
     {
         $this->shouldHaveType(PCas::class);
     }
 
+    /**
+     * @name I can login.
+     */
     public function it_can_login()
     {
         $properties = $this->getProperties();
@@ -73,6 +79,9 @@ class PCasSpec extends ObjectBehavior
         $this->login()->getStatusCode()->shouldBe(302);
     }
 
+    /**
+     * @name I can logout.
+     */
     public function it_can_logout()
     {
         $properties = $this->getProperties();

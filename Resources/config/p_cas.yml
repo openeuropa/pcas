@@ -27,7 +27,7 @@ parameters:
 services:
   pcas:
     class: OpenEuropa\pcas\PCas
-    arguments: ['%p_cas%', '@?pcas.httpclient', '@?pcas.protocol', '@?pcas.session', '@?pcas.logger']
+    arguments: ['%p_cas%', '@?pcas.httpclient', '@?pcas.protocol', '@?session']
     public: true
 
   pcas.httpclient:
@@ -39,21 +39,11 @@ services:
     arguments: ['@pcas.userfactory', '@pcas.serializerfactory']
     public: true
 
-  pcas.session:
-    synthetic: true
-    factory: 'pcas.sessionfactory:createSession'
-
-  pcas.logger:
-    class: Psr\Log\NullLogger
-
   pcas.userfactory:
     class: OpenEuropa\pcas\Security\Core\User\PCasUserFactory
 
   pcas.serializerfactory:
     class: OpenEuropa\pcas\Utils\PCasSerializerFactory
-
-  pcas.sessionfactory:
-    class: OpenEuropa\pcas\Utils\PCasSessionFactory
 
   pcas.httpclientfactory:
     class: OpenEuropa\pcas\Http\HttpClientFactory
