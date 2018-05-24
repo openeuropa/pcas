@@ -68,15 +68,26 @@ abstract class AbstractCasProtocol implements CasProtocolInterface
      *   The URI factory.
      */
     public function __construct(
-        HttpClientInterface $client,
         PCasUserFactoryInterface $PCasUserFactory,
         PCasSerializerFactoryInterface $serializerFactory,
         UriFactory $uriFactory = null
     ) {
-        $this->client = $client;
         $this->userFactory = $PCasUserFactory;
         $this->serializerFactory = $serializerFactory;
         $this->uriFactory = $uriFactory ?? UriFactoryDiscovery::find();
+    }
+
+    /**
+     * @param \OpenEuropa\pcas\Http\HttpClientInterface $httpClient
+     *
+     * @return \OpenEuropa\pcas\Cas\Protocol\AbstractCasProtocol
+     */
+    public function withHttpClient(HttpClientInterface $httpClient)
+    {
+        $clone = clone $this;
+        $clone->client = $httpClient;
+
+        return $clone;
     }
 
     /**

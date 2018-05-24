@@ -1,6 +1,7 @@
 <?php
 namespace OpenEuropa\pcas\Cas\Protocol;
 
+use OpenEuropa\pcas\Http\HttpClientInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 interface CasProtocolInterface
@@ -29,6 +30,15 @@ interface CasProtocolInterface
      *   The URI.
      */
     public function currentUrl($url = '');
+
+    /**
+     * Set the HTTP client.
+     *
+     * @param \OpenEuropa\pcas\Http\HttpClientInterface $httpClient
+     *
+     * @return $this
+     */
+    public function withHttpClient(HttpClientInterface $httpClient);
 
     /**
      * Get the http client.
