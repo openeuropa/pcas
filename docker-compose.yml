@@ -2,7 +2,6 @@ version: '2'
 services:
 
   web:
-    # image: fpfis/httpd-php-dev:5.6
     image: fpfis/httpd-php-dev:7.1
     working_dir: /var/www/html
     ports:

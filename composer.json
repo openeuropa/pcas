@@ -35,12 +35,6 @@
       "OpenEuropa\\pcas\\": "src/"
     }
   },
-  "authors": [
-    {
-      "name": "Pol Dellaiera",
-      "email": "pol.dellaiera@protonmail.com"
-    }
-  ],
   "scripts": {
     "phpspec": "./vendor/bin/phpspec run",
     "grumphp": "./vendor/bin/grumphp run"

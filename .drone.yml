@@ -4,14 +4,14 @@ workspace:
 
 services:
   web:
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: ${IMAGE_PHP=fpfis/httpd-php-dev:7.1}
     environment:
       - DOCUMENT_ROOT=/test/pcas
 
 pipeline:
   composer-install:
     group: prepare
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: ${IMAGE_PHP=fpfis/httpd-php-dev:7.1}
     volumes:
       - /cache:/cache
     commands:
@@ -19,11 +19,10 @@ pipeline:
 
   grumphp:
     group: test
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: ${IMAGE_PHP=fpfis/httpd-php-dev:7.1}
     commands:
       - ./vendor/bin/grumphp run
 
 matrix:
   IMAGE_PHP:
-    - fpfis/httpd-php-dev:5.6
     - fpfis/httpd-php-dev:7.1
