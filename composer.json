@@ -28,19 +28,13 @@
     "sebastian/phpcpd": "^3.0",
     "sensiolabs/security-checker": "^4.0",
     "friendsofphp/php-cs-fixer": "^2.9",
-    "drupol/phpspec-annotation": "dev-master"
+    "drupol/phpspec-annotation": "^1.0"
   },
   "autoload": {
     "psr-4": {
       "OpenEuropa\\pcas\\": "src/"
     }
   },
-  "authors": [
-    {
-      "name": "Pol Dellaiera",
-      "email": "pol.dellaiera@protonmail.com"
-    }
-  ],
   "scripts": {
     "phpspec": "./vendor/bin/phpspec run",
     "grumphp": "./vendor/bin/grumphp run"

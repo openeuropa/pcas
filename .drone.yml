@@ -1,0 +1,28 @@
+workspace:
+  base: /test
+  path: pcas
+
+services:
+  web:
+    image: ${IMAGE_PHP=fpfis/httpd-php-dev:7.1}
+    environment:
+      - DOCUMENT_ROOT=/test/pcas
+
+pipeline:
+  composer-install:
+    group: prepare
+    image: ${IMAGE_PHP=fpfis/httpd-php-dev:7.1}
+    volumes:
+      - /cache:/cache
+    commands:
+      - composer install
+
+  grumphp:
+    group: test
+    image: ${IMAGE_PHP=fpfis/httpd-php-dev:7.1}
+    commands:
+      - ./vendor/bin/grumphp run
+
+matrix:
+  IMAGE_PHP:
+    - fpfis/httpd-php-dev:7.1
