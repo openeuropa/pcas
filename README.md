@@ -1,6 +1,5 @@
-[![Build Status](https://www.travis-ci.org/openeuropa/pcas.svg?branch=master)](https://www.travis-ci.org/openeuropa/pcas)
-
 # pCAS library
+[![Build Status](https://drone.fpfis.eu/api/badges/openeuropa/pcas/status.svg)](https://drone.fpfis.eu/openeuropa/pcas/)
 
 pCAS, a CAS library for PHP.
 
