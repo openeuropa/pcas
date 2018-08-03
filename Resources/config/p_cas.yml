@@ -41,13 +41,13 @@ services:
     class: OpenEuropa\pcas\Config\PcasConfig
     arguments: ['%protocol.login.uri%'
                 '%protocol.login.query%'
-                '%protocol.login.allowed_parameters%'ers%'
+                '%protocol.login.allowed_parameters%'
                 '%protocol.logout.uri%'
                 '%protocol.logout.query%'
                 '%protocol.logout.allowed_parameters%'
                 '%protocol.servicevalidate.uri%'
                 '%protocol.servicevalidate.query%'
-                '%protocol.servicevalidate.allowed_paramet
+                '%protocol.servicevalidate.allowed_parameters%'n
                 '%logger_startup_message%'
                 ]
     public: true

@@ -286,7 +286,7 @@ class PcasConfig
                     ],
 
                     'logout' => [
-                        'uri' => $this->getLoginUri(),
+                        'uri' => $this->getLogoutUri(),
                         'query' => $this->getLogoutQuery(),
                         'allowed_parameters' => $this->getLogoutAllowedParams(),
                     ],
