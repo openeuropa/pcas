@@ -2,9 +2,9 @@
 namespace spec\OpenEuropa\pcas;
 
 use OpenEuropa\pcas\Cas\Protocol\V2\CasProtocolV2;
+use OpenEuropa\pcas\Config\PcasConfig;
 use OpenEuropa\pcas\Http\HttpClientFactory;
 use OpenEuropa\pcas\PCas;
-use OpenEuropa\pcas\Config\PcasConfig;
 use OpenEuropa\pcas\Security\Core\User\PCasUserFactory;
 use OpenEuropa\pcas\Utils\PCasSerializerFactory;
 use PhpSpec\ObjectBehavior;

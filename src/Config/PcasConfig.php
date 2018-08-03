@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aritoadmin
- * Date: 02/08/2018
- * Time: 14:39
- */
 
 namespace OpenEuropa\pcas\Config;
-
 
 class PcasConfig
 {
@@ -15,61 +8,61 @@ class PcasConfig
      * @var string
      *  A logger message.
      */
-   private $loggerStartupMessage;
+    private $loggerStartupMessage;
 
     /**
-     * @var string
-     *  The login uri.
-     */
-   private $loginUri;
+    * @var string
+    *  The login uri.
+    */
+    private $loginUri;
 
     /**
-     * @var array
-     *  A logger message.
-     */
-   private $loginQuery;
+    * @var array
+    *  A logger message.
+    */
+    private $loginQuery;
 
     /**
      * @var array
      *  An array with all allowed login parameters.
      */
-   private $loginAllowedParams;
+    private $loginAllowedParams;
 
     /**
      * @var string
      *  The logout uri.
      */
-   private $logoutUri;
+    private $logoutUri;
 
     /**
      * @var array
      *  A logout query to be validated.
      */
-   private $logoutQuery;
+    private $logoutQuery;
 
     /**
      * @var array
      *  An array with all allowed logout parameters.
      */
-   private $logoutAllowedParams;
+    private $logoutAllowedParams;
 
     /**
      * @var string
      *  The service validate uri.
      */
-   private $serviceValidateUri;
+    private $serviceValidateUri;
 
     /**
      * @var array
      *  A query to be validated.
      */
-   private $serviceValidateQuery;
+    private $serviceValidateQuery;
 
     /**
      * @var array
      *  An array with all allowed query parameters.
      */
-   private $serviceValidateAllowedParams;
+    private $serviceValidateAllowedParams;
 
     /**
      * PcasConfig constructor.
@@ -85,30 +78,29 @@ class PcasConfig
      * @param array $serviceValidateAllowedParams
      * @param string $loggerStartupMessage
      */
-   public function __construct(
-       string $loginUri,
-       array $loginQuery,
-       array $loginAllowedParams,
-       string $logoutUri,
-       array $logoutQuery,
-       array $logoutAllowedParams,
-       string $serviceValidateUri,
-       array $serviceValidateQuery,
-       array $serviceValidateAllowedParams,
-       string $loggerStartupMessage = ''
-     )
-   {
-       $this->setLoginUri($loginUri);
-       $this->setLoginQuery($loginQuery);
-       $this->setLoginAllowedParams($loginAllowedParams);
-       $this->setServiceValidateUri($serviceValidateUri);
-       $this->setserviceValidateQuery($serviceValidateQuery);
-       $this->setServiceValidateAllowedParams($serviceValidateAllowedParams);
-       $this->setLogoutUri($logoutUri);
-       $this->setLogoutQuery($logoutQuery);
-       $this->setLogoutAllowedParams($logoutAllowedParams);
-       $this->setLoggerStartupMessage($loggerStartupMessage);
-   }
+    public function __construct(
+        string $loginUri,
+        array $loginQuery,
+        array $loginAllowedParams,
+        string $logoutUri,
+        array $logoutQuery,
+        array $logoutAllowedParams,
+        string $serviceValidateUri,
+        array $serviceValidateQuery,
+        array $serviceValidateAllowedParams,
+        string $loggerStartupMessage = ''
+    ) {
+        $this->setLoginUri($loginUri);
+        $this->setLoginQuery($loginQuery);
+        $this->setLoginAllowedParams($loginAllowedParams);
+        $this->setServiceValidateUri($serviceValidateUri);
+        $this->setserviceValidateQuery($serviceValidateQuery);
+        $this->setServiceValidateAllowedParams($serviceValidateAllowedParams);
+        $this->setLogoutUri($logoutUri);
+        $this->setLogoutQuery($logoutQuery);
+        $this->setLogoutAllowedParams($logoutAllowedParams);
+        $this->setLoggerStartupMessage($loggerStartupMessage);
+    }
 
     /**
      * @return string
@@ -227,7 +219,7 @@ class PcasConfig
     /**
      * @return string
      */
-    public function getserviceValidateUri(): string
+    public function getServiceValidateUri(): string
     {
         return $this->serviceValidateUri;
     }
@@ -301,5 +293,4 @@ class PcasConfig
                 'logger_startup_message' => $this->getLoggerStartupMessage(),
         ];
     }
-
 }
