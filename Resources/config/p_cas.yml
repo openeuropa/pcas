@@ -1,38 +1,56 @@
 parameters:
-  p_cas:
-    logger_startup_message: 'Logger just got started!!! (from original config)'
-    protocol:
-      login:
-        uri: http://127.0.0.1:8000/login
-        query: []
-        allowed_parameters:
-          - service
-          - renew
-          - gateway
-      servicevalidate:
-        uri: http://127.0.0.1:8000/serviceValidate
-        query: []
-        allowed_parameters:
-          - service
-          - ticket
-          - pgtUrl
-          - renew
-          - format
-      logout:
-        uri: http://127.0.0.1:8000/logout
-        query: []
-        allowed_parameters:
-          - service
+  logger_startup_message: 'Logger just got started!!! (from original config)'
+
+  protocol.login.uri: http://127.0.0.1:8000/login
+  protocol.login.query: []
+  protocol.login.allowed_parameters:
+    - service
+    - renew
+    - gateway
+
+  protocol.servicevalidate.uri: http://127.0.0.1:8000/serviceValidate
+  protocol.servicevalidate.query: []
+  protocol.servicevalidate.allowed_parameters:
+    - service
+    - ticket
+    - pgtUrl
+    - renew
+    - format
+
+  protocol.logout.uri: http://127.0.0.1:8000/logout
+  protocol.logout.query: []
+  protocol.logout.allowed_parameters:
+    - service
 
 services:
   pcas:
     class: OpenEuropa\pcas\PCas
-    arguments: ['%p_cas%', '@?pcas.httpclient', '@?pcas.protocol', '@?session']
+    arguments: [
+      '@?pcas.config',
+      '@?pcas.httpclient',
+      '@?pcas.protocol',
+      '@?session',
+    ]
     public: true
 
   pcas.httpclient:
     class: OpenEuropa\pcas\Http\Client
     factory: 'pcas.httpclientfactory:getHttpClient'
+
+  pcas.config:
+    class: OpenEuropa\pcas\Config\PcasConfig
+    arguments: ['%protocol.login.uri%'
+                '%protocol.login.query%'
+                '%protocol.login.allowed_parameters%'
+                '%protocol.logout.uri%'
+                '%protocol.logout.query%'
+                '%protocol.logout.allowed_parameters%'
+                '%protocol.servicevalidate.uri%'
+                '%protocol.servicevalidate.query%'
+                '%protocol.servicevalidate.allowed_parameters%'n
+                '%logger_startup_message%'
+                ]
+    public: true
 
   pcas.protocol:
     class: OpenEuropa\pcas\Cas\Protocol\V2\CasProtocolV2
