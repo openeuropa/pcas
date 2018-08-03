@@ -48,39 +48,6 @@ class CasProtocolV2 extends AbstractCasProtocol
             }
             $pCasUser = $validatedResponse;
 
-
-            //check if a ProxyGrantingTicketIOU was set
-            if ($requestPgt
-                && StringUtils::isNotEmpty($proxyGrantingTicketCallback)
-                && StringUtils::isNotEmpty($pCasUser->getPgtIOU())
-            ) {
-                $pgtiou = $pCasUser->getPgtIOU();
-
-                //checking if we have a PGTIOU in the cache
-                /*
-                                if ($this->getCache()->has($pgtiou)) {
-                                    $pCasUser->setProxyGrantingTicket(
-                                      $this->getCache()->get(
-                                        $pgtiou
-                                      )->getValue()
-                                    );
-
-                                    $this->getLogger()->debug(sprintf(
-                                      '
-                              Found PGT %s for PGTIOU %s',
-                                      $pCasUser->getProxyGrantingTicket(),
-                                      $pgtiou
-                                    ));
-                                } else {
-                                    $this->getLogger()->warn(sprintf(
-                                      '
-                              Could not find any PGT in the cache for IOU: %s',
-                                      $pgtiou
-                                    ));
-                                }
-                */
-            }
-
             $this->getSession()->set('pcas/user', $pCasUser);
 
             return true;
@@ -109,7 +76,7 @@ class CasProtocolV2 extends AbstractCasProtocol
             return false;
         }
 
-        //check if the validation was ok!
+        // Check if the validation was ok!
         if (!isset($root['cas:authenticationSuccess'])) {
             // @todo: log
             return false;

@@ -2,6 +2,7 @@
 namespace OpenEuropa\pcas;
 
 use OpenEuropa\pcas\Cas\Protocol\CasProtocolInterface;
+use OpenEuropa\pcas\Config\PcasConfig;
 use OpenEuropa\pcas\Http\HttpClientInterface;
 use OpenEuropa\pcas\Security\Core\User\PCasUser;
 use OpenEuropa\pcas\Utils\GlobalVariablesGetter;
@@ -19,6 +20,7 @@ class PCas implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
+    /* The api version should be removed from here*/
     const VERSION = '0.0.1';
 
     /**
@@ -68,8 +70,7 @@ class PCas implements LoggerAwareInterface
     /**
      * PCas constructor.
      *
-     * @param array $properties
-     *   The properties.
+     * @param \OpenEuropa\pcas\Config\PcasConfig $pcasConfig
      * @param \OpenEuropa\pcas\Http\HttpClientInterface $client
      * @param \OpenEuropa\pcas\Cas\Protocol\CasProtocolInterface $protocol
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
@@ -77,14 +78,14 @@ class PCas implements LoggerAwareInterface
      * @param \Psr\Log\LoggerInterface|null $logger
      */
     public function __construct(
-        array $properties,
+        PcasConfig $pcasConfig,
         HttpClientInterface $client,
         CasProtocolInterface $protocol,
         SessionInterface $session,
         CacheInterface $cache = null,
         LoggerInterface $logger = null
     ) {
-        $this->setProperties($properties);
+        $this->setProperties($pcasConfig);
 
         $this->setHttpClient($client);
         $this->setProtocol(
@@ -185,14 +186,14 @@ class PCas implements LoggerAwareInterface
     /**
      * Set the properties.
      *
-     * @param array $properties
-     *   The properties.
+     * @param \OpenEuropa\pcas\Config\PcasConfig $pcasConfig
+     *   The pcas configuration service.
      *
      * @return \OpenEuropa\pcas\PCas
      */
-    public function setProperties(array $properties)
+    public function setProperties($pcasConfig)
     {
-        $this->properties = $properties;
+        $this->properties = $pcasConfig->getProperties();
 
         return $this;
     }
