@@ -25,7 +25,7 @@ parameters:
 services:
   pcas:
     class: OpenEuropa\pcas\PCas
-    arguments: ['@?pcas.config', '@?pcas.httpclient', '@?pcas.protocol', '@?session']
+    arguments: ['@?pcas.config','@?pcas.httpclient','@?pcas.protocol','@?session']
     public: true
 
   pcas.httpclient:
@@ -34,17 +34,7 @@ services:
 
   pcas.config:
     class: OpenEuropa\pcas\Config\PcasConfig
-    arguments: ['%protocol.login.uri%'
-                '%protocol.login.query%'
-                '%protocol.login.allowed_parameters%'
-                '%protocol.logout.uri%'
-                '%protocol.logout.query%'
-                '%protocol.logout.allowed_parameters%'
-                '%protocol.servicevalidate.uri%'
-                '%protocol.servicevalidate.query%'
-                '%protocol.servicevalidate.allowed_parameters%'n
-                '%logger_startup_message%'
-                ]
+    arguments: ['%protocol.login.uri%','%protocol.login.query%','%protocol.login.allowed_parameters%','%protocol.logout.uri%','%protocol.logout.query%','%protocol.logout.allowed_parameters%','%protocol.servicevalidate.uri%','%protocol.servicevalidate.query%','%protocol.servicevalidate.allowed_parameters%','%logger_startup_message%']
     public: true
 
   pcas.protocol:
