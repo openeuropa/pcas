@@ -3,7 +3,7 @@
     "license": "proprietary",
     "require": {
         "php": "^7.0.8",
-        "OpenEuropa/pcas": "dev-master",
+        "OpenEuropa/pcas": "dev-OPENEUROPA-754",
         "guzzlehttp/psr7": "^1.4",
         "php-http/guzzle6-adapter": "^1.1",
         "sensio/framework-extra-bundle": "^5.0",

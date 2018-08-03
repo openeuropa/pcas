@@ -25,12 +25,7 @@ parameters:
 services:
   pcas:
     class: OpenEuropa\pcas\PCas
-    arguments: [
-      '@?pcas.config',
-      '@?pcas.httpclient',
-      '@?pcas.protocol',
-      '@?session',
-    ]
+    arguments: ['@?pcas.config', '@?pcas.httpclient', '@?pcas.protocol', '@?session']
     public: true
 
   pcas.httpclient:
