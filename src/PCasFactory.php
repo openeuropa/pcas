@@ -26,18 +26,20 @@ class PCasFactory
     /**
      * PCasFactory constructor.
      *
-     * @param array $parameters
      * @param SessionInterface $session
+     * @param array $parameters
      *
      * @throws \Exception
      */
-    public function __construct(array $parameters = null, SessionInterface $session)
+    public function __construct(SessionInterface $session, array $parameters = null)
     {
         $this->container = new ContainerBuilder();
         $loader = new YamlFileLoader($this->container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('p_cas.yml');
-        $this->container->setParameter('p_cas', $parameters);
         $this->container->set('session', $session);
+        if (null !== $parameters) {
+            $this->container->setParameter('p_cas', $parameters);
+        }
     }
 
     /**
@@ -53,9 +55,20 @@ class PCasFactory
     }
 
     /**
-     * @throws InvalidArgumentException          when no definitions are available
-     * @throws ServiceCircularReferenceException When a circular reference is detected
-     * @throws ServiceNotFoundException          When the service is not defined
+     * @param array $parameters
+     */
+    public function setParameters(array $parameters)
+    {
+        $this->container->setParameter('p_cas', $parameters);
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     *  when no definitions are available
+     * @throws ServiceCircularReferenceException
+     *  When a circular reference is detected
+     * @throws ServiceNotFoundException
+     *  When the service is not defined
      * @throws \Exception
      *
      * @return \OpenEuropa\pcas\pcas
@@ -66,9 +79,12 @@ class PCasFactory
     }
 
     /**
-     * @throws InvalidArgumentException          when no definitions are available
-     * @throws ServiceCircularReferenceException When a circular reference is detected
-     * @throws ServiceNotFoundException          When the service is not defined
+     * @throws InvalidArgumentException
+     *  when no definitions are available
+     * @throws ServiceCircularReferenceException
+     *  When a circular reference is detected
+     * @throws ServiceNotFoundException
+     *  When the service is not defined
      * @throws \Exception
      *
      * @return \OpenEuropa\pcas\Http\Client
@@ -79,9 +95,12 @@ class PCasFactory
     }
 
     /**
-     * @throws InvalidArgumentException          when no definitions are available
-     * @throws ServiceCircularReferenceException When a circular reference is detected
-     * @throws ServiceNotFoundException          When the service is not defined
+     * @throws InvalidArgumentException
+     *  when no definitions are available
+     * @throws ServiceCircularReferenceException
+     *  When a circular reference is detected
+     * @throws ServiceNotFoundException
+     *  When the service is not defined
      * @throws \Exception
      *
      * @return \OpenEuropa\pcas\Cas\Protocol\V2\CasProtocolV2
@@ -92,9 +111,12 @@ class PCasFactory
     }
 
     /**
-     * @throws InvalidArgumentException          when no definitions are available
-     * @throws ServiceCircularReferenceException When a circular reference is detected
-     * @throws ServiceNotFoundException          When the service is not defined
+     * @throws InvalidArgumentException
+     *  when no definitions are available
+     * @throws ServiceCircularReferenceException
+     *  When a circular reference is detected
+     * @throws ServiceNotFoundException
+     *  When the service is not defined
      * @throws \Exception
      *
      * @return \OpenEuropa\pcas\Security\Core\User\PCasUserFactory
@@ -105,9 +127,12 @@ class PCasFactory
     }
 
     /**
-     * @throws InvalidArgumentException          when no definitions are available
-     * @throws ServiceCircularReferenceException When a circular reference is detected
-     * @throws ServiceNotFoundException          When the service is not defined
+     * @throws InvalidArgumentException
+     *  when no definitions are available
+     * @throws ServiceCircularReferenceException
+     *  When a circular reference is detected
+     * @throws ServiceNotFoundException
+     *  When the service is not defined
      * @throws \Exception
      *
      * @return \OpenEuropa\pcas\Utils\PCasSerializerFactory
@@ -118,9 +143,12 @@ class PCasFactory
     }
 
     /**
-     * @throws InvalidArgumentException          when no definitions are available
-     * @throws ServiceCircularReferenceException When a circular reference is detected
-     * @throws ServiceNotFoundException          When the service is not defined
+     * @throws InvalidArgumentException
+     *  when no definitions are available
+     * @throws ServiceCircularReferenceException
+     *  When a circular reference is detected
+     * @throws ServiceNotFoundException
+     *  When the service is not defined
      * @throws \Exception
      *
      * @return \OpenEuropa\pcas\Http\HttpClientFactory
