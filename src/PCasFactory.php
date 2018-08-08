@@ -55,14 +55,6 @@ class PCasFactory
     }
 
     /**
-     * @param array $parameters
-     */
-    public function setParameters(array $parameters)
-    {
-        $this->container->setParameter('p_cas', $parameters);
-    }
-
-    /**
      * @throws InvalidArgumentException
      *  when no definitions are available
      * @throws ServiceCircularReferenceException

@@ -53,19 +53,4 @@ class PCasFactorySpec extends ObjectBehavior
         $properties = $pcas->getProperties();
         $properties['logger_startup_message']->shouldBe('Custom message');
     }
-
-    /**
-     * @name I override the Pcas parameters.
-     *
-     * @throws \Exception
-     */
-    public function it_can_override_parameters()
-    {
-        $parameters = PCasFactory::getDefaultParameters();
-        $parameters['logger_startup_message'] = 'Custom message';
-        $this->setParameters($parameters);
-        $pcas = $this->getPCas();
-        $properties = $pcas->getProperties();
-        $properties['logger_startup_message']->shouldBe('Custom message');
-    }
 }
