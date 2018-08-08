@@ -17,11 +17,11 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-              ->scalarNode('logger_startup_message')->defaultValue('')->end()
+              ->scalarNode('base_url')->defaultValue('')->end()
               ->arrayNode('protocol')
                 ->prototype('array')
                 ->children()
-                      ->scalarNode('uri')->isRequired()->end()
+                      ->scalarNode('path')->isRequired()->end()
                       ->arrayNode('query')
                         ->canBeUnset()
                         ->prototype('scalar')->end()
