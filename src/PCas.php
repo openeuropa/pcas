@@ -66,13 +66,13 @@ class PCas implements LoggerAwareInterface
     /**
      * PCas constructor.
      *
-     * @param array $properties
+     * @param array                                                      $properties
      *   The properties.
-     * @param \OpenEuropa\pcas\Http\HttpClientInterface $client
-     * @param \OpenEuropa\pcas\Cas\Protocol\CasProtocolInterface $protocol
+     * @param \OpenEuropa\pcas\Http\HttpClientInterface                  $client
+     * @param \OpenEuropa\pcas\Cas\Protocol\CasProtocolInterface         $protocol
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param \Psr\SimpleCache\CacheInterface $cache
-     * @param \Psr\Log\LoggerInterface|null $logger
+     * @param \Psr\SimpleCache\CacheInterface                            $cache
+     * @param \Psr\Log\LoggerInterface|null                              $logger
      */
     public function __construct(
         array $properties,
@@ -245,7 +245,7 @@ class PCas implements LoggerAwareInterface
      */
     public function setQueryParameter($name, $value)
     {
-        $this->getSession()->set('pcas/query/' . $name, $value);
+        $this->getSession()->set('pcas/query/'.$name, $value);
 
         return $this;
     }
@@ -253,7 +253,7 @@ class PCas implements LoggerAwareInterface
     /**
      * Get a query parameter.
      *
-     * @param string $name
+     * @param string     $name
      *   The query parameter.
      * @param null|mixed $default
      *
@@ -262,7 +262,7 @@ class PCas implements LoggerAwareInterface
      */
     public function getQueryParameter($name, $default = null)
     {
-        return $this->getSession()->get('pcas/query/' . $name, $default);
+        return $this->getSession()->get('pcas/query/'.$name, $default);
     }
 
     /**
@@ -275,7 +275,7 @@ class PCas implements LoggerAwareInterface
      */
     public function clearQueryParameter($name)
     {
-        return $this->getSession()->remove('pcas/query/' . $name);
+        return $this->getSession()->remove('pcas/query/'.$name);
     }
 
     /**
@@ -435,7 +435,7 @@ class PCas implements LoggerAwareInterface
      *
      * @param string|null $serviceTicket
      *   The ticket received from ECAS
-     * @param bool     $requestPgt
+     * @param bool        $requestPgt
      * @param string|null $url
      *
      * @throws \Exception

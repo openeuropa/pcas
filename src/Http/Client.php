@@ -25,7 +25,7 @@ class Client implements HttpClientInterface
     /**
      * Client constructor.
      *
-     * @param \Http\Client\HttpClient|NULL $httpClient
+     * @param \Http\Client\HttpClient|NULL      $httpClient
      *   The HTTP client.
      * @param \Http\Message\MessageFactory|NULL $messageFactory
      *   The message factory.
@@ -48,7 +48,7 @@ class Client implements HttpClientInterface
         try {
             return $this->sendRequest($request);
         } catch (TransferException $e) {
-            throw new \Exception('Error while requesting data from CAS: ' . $e->getMessage(), $e->getCode(), $e);
+            throw new \Exception('Error while requesting data from CAS: '.$e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -58,7 +58,7 @@ class Client implements HttpClientInterface
     public function redirect($url, $replace = true, $code = 302)
     {
         return $this->messageFactory->createResponse($code, '', [
-          'Location' => $url,
+            'Location' => $url,
         ]);
     }
 

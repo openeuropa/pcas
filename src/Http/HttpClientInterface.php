@@ -32,13 +32,13 @@ interface HttpClientInterface extends HttpClient
      *
      * @param \Psr\Http\Message\UriInterface|string $url
      *   The URL to redirect to.
-     * @param bool                               $replace
+     * @param bool                                  $replace
      *   The optional replace parameter indicates
      *   whether the header should replace a previous similar header, or
      *   add a second header of the same type. By default it will replace,
      *   but if you pass in false as the second argument you can force
      *   multiple headers of the same type.
-     * @param int                               $code
+     * @param int                                   $code
      *   Forces the HTTP response code to the specified value.
      *
      * @return \Psr\Http\Message\ResponseInterface
