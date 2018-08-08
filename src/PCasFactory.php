@@ -31,15 +31,18 @@ class PCasFactory
      *
      * @throws \Exception
      */
-    public function __construct(SessionInterface $session, array $parameters = null)
+    public function __construct(SessionInterface $session, array $parameters = [])
     {
         $this->container = new ContainerBuilder();
         $loader = new YamlFileLoader($this->container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('p_cas.yml');
         $this->container->set('session', $session);
-        if (null !== $parameters) {
-            $this->container->setParameter('p_cas', $parameters);
-        }
+
+        $configuration = $this->container->getParameter('p_cas');
+        foreach ($parameters as $name => $value) {
+            $configuration[$name] = $value;
+        };
+        $this->container->setParameter('p_cas', $configuration);
     }
 
     /**

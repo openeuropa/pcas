@@ -33,6 +33,38 @@ class PCasFactorySpec extends ObjectBehavior
     {
         $pcas = $this->getPCas();
         $pcas->shouldBeAnInstanceOf(PCas::class);
+
+        $properties = $this->getPCas()->getProperties();
+        $properties['base_url']->shouldBe('http://127.0.0.1:8000');
+        $properties['protocol']->shouldBe([
+            'login' => [
+                'path' => '/login',
+                'query' => [],
+                'allowed_parameters' => [
+                    'service',
+                    'renew',
+                    'gateway',
+                ],
+            ],
+            'servicevalidate' => [
+                'path' => '/serviceValidate',
+                'query' => [],
+                'allowed_parameters' => [
+                    'service',
+                    'ticket',
+                    'pgtUrl',
+                    'renew',
+                    'format',
+                ],
+            ],
+            'logout' => [
+                'path' => '/logout',
+                'query' => [],
+                'allowed_parameters' => [
+                    'service',
+                ],
+            ],
+        ]);
     }
 
     /**
@@ -42,15 +74,38 @@ class PCasFactorySpec extends ObjectBehavior
      */
     public function it_can_generate_custom_pcas()
     {
-        $parameters = PCasFactory::getDefaultParameters();
-        $parameters['logger_startup_message'] = 'Custom message';
         $session = new Session();
-        $this->beConstructedWith(
-            $session,
-            $parameters
-        );
-        $pcas = $this->getPCas();
-        $properties = $pcas->getProperties();
-        $properties['logger_startup_message']->shouldBe('Custom message');
+        $this->beConstructedWith($session, ['base_url' => 'http://localhost']);
+        $properties = $this->getPCas()->getProperties();
+        $properties['base_url']->shouldBe('http://localhost');
+        $properties['protocol']->shouldBe([
+            'login' => [
+                'path' => '/login',
+                'query' => [],
+                'allowed_parameters' => [
+                    'service',
+                    'renew',
+                    'gateway',
+                ],
+            ],
+            'servicevalidate' => [
+                'path' => '/serviceValidate',
+                'query' => [],
+                'allowed_parameters' => [
+                    'service',
+                    'ticket',
+                    'pgtUrl',
+                    'renew',
+                    'format',
+                ],
+            ],
+            'logout' => [
+                'path' => '/logout',
+                'query' => [],
+                'allowed_parameters' => [
+                    'service',
+                ],
+            ],
+        ]);
     }
 }
