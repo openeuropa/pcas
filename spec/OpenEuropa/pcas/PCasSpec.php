@@ -15,15 +15,16 @@ class PCasSpec extends ObjectBehavior
     public function getProperties()
     {
         return [
+            'base_url' => 'http://cas-server',
             'protocol' => [
                 'login' => [
-                    'uri' => 'http://cas-server/login',
+                    'path' => '/login',
                     'allowed_parameters' => [
                         'service',
                     ],
                 ],
                 'logout' => [
-                    'uri' => 'http://cas-server/logout',
+                    'path' => '/logout',
                     'allowed_parameters' => [
                         'service',
                     ],
@@ -72,7 +73,8 @@ class PCasSpec extends ObjectBehavior
     public function it_can_login()
     {
         $properties = $this->getProperties();
-        $url = sprintf('%s?service=%s', $properties['protocol']['login']['uri'], urlencode(sprintf('http://%s/', $_SERVER['HTTP_HOST'])));
+        $uri = $properties['base_url'] . $properties['protocol']['login']['path'];
+        $url = sprintf('%s?service=%s', $uri, urlencode(sprintf('http://%s/', $_SERVER['HTTP_HOST'])));
 
         $this->loginUrl()->__toString()->shouldBe($url);
         $this->login()->shouldBeAnInstanceOf(ResponseInterface::class);
@@ -85,7 +87,8 @@ class PCasSpec extends ObjectBehavior
     public function it_can_logout()
     {
         $properties = $this->getProperties();
-        $url = sprintf('%s?service=%s', $properties['protocol']['logout']['uri'], urlencode(sprintf('http://%s/', $_SERVER['HTTP_HOST'])));
+        $uri = $properties['base_url'] . $properties['protocol']['logout']['path'];
+        $url = sprintf('%s?service=%s', $uri, urlencode(sprintf('http://%s/', $_SERVER['HTTP_HOST'])));
 
         $this->logoutUrl()->__toString()->shouldBe($url);
         $this->logout()->shouldBeNull();

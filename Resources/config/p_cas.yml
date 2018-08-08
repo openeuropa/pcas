@@ -1,16 +1,16 @@
 parameters:
   p_cas:
-    logger_startup_message: 'Logger just got started!!! (from original config)'
+    base_url: http://127.0.0.1:8000
     protocol:
       login:
-        uri: http://127.0.0.1:8000/login
+        path: /login
         query: []
         allowed_parameters:
           - service
           - renew
           - gateway
       servicevalidate:
-        uri: http://127.0.0.1:8000/serviceValidate
+        path: /serviceValidate
         query: []
         allowed_parameters:
           - service
@@ -19,7 +19,7 @@ parameters:
           - renew
           - format
       logout:
-        uri: http://127.0.0.1:8000/logout
+        path: /logout
         query: []
         allowed_parameters:
           - service
@@ -27,7 +27,7 @@ parameters:
 services:
   pcas:
     class: OpenEuropa\pcas\PCas
-    arguments: ['%p_cas%', '@?pcas.httpclient', '@?pcas.protocol', '@?session']
+    arguments: ['%p_cas%', '@pcas.httpclient', '@pcas.protocol', '@session']
     public: true
 
   pcas.httpclient:
@@ -47,3 +47,6 @@ services:
 
   pcas.httpclientfactory:
     class: OpenEuropa\pcas\Http\HttpClientFactory
+
+  session:
+    synthetic: true
