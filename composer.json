@@ -20,15 +20,12 @@
   },
   "require-dev": {
     "php-http/guzzle6-adapter": "^1.1",
-    "phpro/grumphp": "^0.14",
     "phpspec/phpspec": "^4.3",
-    "squizlabs/php_codesniffer": "^3.0",
     "scrutinizer/ocular": "^1.4",
-    "phpmd/phpmd": "^2.6",
     "sebastian/phpcpd": "^3.0",
     "sensiolabs/security-checker": "^4.0",
-    "friendsofphp/php-cs-fixer": "^2.9",
-    "drupol/phpspec-annotation": "^1.0"
+    "drupol/phpspec-annotation": "^1.0",
+    "openeuropa/code-review": "~0.3"
   },
   "autoload": {
     "psr-4": {
