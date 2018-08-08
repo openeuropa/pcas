@@ -68,6 +68,20 @@ class PCasFactorySpec extends ObjectBehavior
     }
 
     /**
+     * @name I can use an external session object.
+     *
+     * @throws \Exception
+     */
+    public function it_can_use_an_external_session_object()
+    {
+        $session = new Session();
+        $session->setName('My session');
+        $this->beConstructedWith($session);
+
+        $this->getSession()->getName()->shouldBe('My session');
+    }
+
+    /**
      * @name I can generate a customized pcas object.
      *
      * @throws \Exception

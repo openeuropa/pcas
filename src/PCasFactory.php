@@ -61,7 +61,7 @@ class PCasFactory
 
     /**
      * @throws InvalidArgumentException
-     *  when no definitions are available
+     *  When no definitions are available
      * @throws ServiceCircularReferenceException
      *  When a circular reference is detected
      * @throws ServiceNotFoundException
@@ -77,7 +77,7 @@ class PCasFactory
 
     /**
      * @throws InvalidArgumentException
-     *  when no definitions are available
+     *  When no definitions are available
      * @throws ServiceCircularReferenceException
      *  When a circular reference is detected
      * @throws ServiceNotFoundException
@@ -93,7 +93,7 @@ class PCasFactory
 
     /**
      * @throws InvalidArgumentException
-     *  when no definitions are available
+     *  When no definitions are available
      * @throws ServiceCircularReferenceException
      *  When a circular reference is detected
      * @throws ServiceNotFoundException
@@ -109,7 +109,7 @@ class PCasFactory
 
     /**
      * @throws InvalidArgumentException
-     *  when no definitions are available
+     *  When no definitions are available
      * @throws ServiceCircularReferenceException
      *  When a circular reference is detected
      * @throws ServiceNotFoundException
@@ -125,7 +125,7 @@ class PCasFactory
 
     /**
      * @throws InvalidArgumentException
-     *  when no definitions are available
+     *  When no definitions are available
      * @throws ServiceCircularReferenceException
      *  When a circular reference is detected
      * @throws ServiceNotFoundException
@@ -141,7 +141,7 @@ class PCasFactory
 
     /**
      * @throws InvalidArgumentException
-     *  when no definitions are available
+     *  When no definitions are available
      * @throws ServiceCircularReferenceException
      *  When a circular reference is detected
      * @throws ServiceNotFoundException
@@ -153,5 +153,17 @@ class PCasFactory
     public function getHttpClientFactory()
     {
         return $this->container->get('pcas.httpclientfactory');
+    }
+
+    /**
+     * Return session object.
+     *
+     * @throws \Exception
+     *
+     * @return \Symfony\Component\HttpFoundation\Session\SessionInterface
+     */
+    public function getSession()
+    {
+        return $this->container->get('session');
     }
 }
