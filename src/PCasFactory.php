@@ -43,6 +43,8 @@ class PCasFactory
             $configuration[$name] = $value;
         };
         $this->container->setParameter('p_cas', $configuration);
+
+        $this->container->compile();
     }
 
     /**
