@@ -48,7 +48,6 @@ class DefaultController extends Controller
         return [
             'welcome'    => $welcome,
             'link'       => $link,
-            'version'    => $pCas::VERSION,
             'properties' => $pCas->getProperties(),
             'server'     => $request->server,
             'session'    => $pCas->getSession()->all(),

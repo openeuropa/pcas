@@ -19,8 +19,6 @@ class PCas implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    const VERSION = '0.0.1';
-
     /**
      * The HTTP client.
      *
