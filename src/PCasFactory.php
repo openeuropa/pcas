@@ -27,11 +27,12 @@ class PCasFactory
      * PCasFactory constructor.
      *
      * @param SessionInterface $session
-     * @param array $parameters
+     * @param string $baseUrl
+     * @param array $protocol
      *
      * @throws \Exception
      */
-    public function __construct(SessionInterface $session, array $parameters = [])
+    public function __construct(SessionInterface $session, string $baseUrl = '', array $protocol = [])
     {
         $this->container = new ContainerBuilder();
         $loader = new YamlFileLoader($this->container, new FileLocator(__DIR__ . '/../Resources/config'));
@@ -39,9 +40,12 @@ class PCasFactory
         $this->container->set('session', $session);
 
         $configuration = $this->container->getParameter('p_cas');
-        foreach ($parameters as $name => $value) {
-            $configuration[$name] = $value;
-        };
+        if (!empty($baseUrl)) {
+            $configuration['base_url'] = $baseUrl;
+        }
+        if (!empty($protocols)) {
+            $configuration['protocol'] = $protocol;
+        }
         $this->container->setParameter('p_cas', $configuration);
 
         $this->container->compile();

@@ -48,10 +48,11 @@ You can set those parameters as shown below:
 use OpenEuropa\pcas\PCasFactory;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-$factory = new PCasFactory(new Session(), [
-    'base_url' => 'http://my-cas-server.com',
-    'protocol' => [...],
-]);
+$factory = new PCasFactory(
+    new Session(), 
+    'http://my-cas-server.com', // This is your custom base_url parameter.
+    [...] // This is your custom protocol parameter.
+);
 $pcas = $factory->getPCas();
 ```
 
