@@ -89,9 +89,10 @@ class PCasFactorySpec extends ObjectBehavior
     public function it_can_generate_custom_pcas()
     {
         $session = new Session();
-        $this->beConstructedWith($session, 'http://localhost');
-        $properties = $this->getPCas()->getProperties();
-        $properties['base_url']->shouldBe('http://localhost');
+        $this->beConstructedWith($session, 'http://localhost/cas');
+        $pcas = $this->getPCas();
+        $properties = $pcas->getProperties();
+        $properties['base_url']->shouldBe('http://localhost/cas');
         $properties['protocol']->shouldBe([
             'login' => [
                 'path' => '/login',
@@ -121,5 +122,8 @@ class PCasFactorySpec extends ObjectBehavior
                 ],
             ],
         ]);
+
+        $uri = $pcas->loginUrl(['service' => 'http://localhost']);
+        $uri->getPath()->shouldBe('/cas/login');
     }
 }
