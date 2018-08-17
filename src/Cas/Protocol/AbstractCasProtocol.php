@@ -213,9 +213,8 @@ abstract class AbstractCasProtocol implements CasProtocolInterface
         $uri = $this->getUriFactory()
             ->createUri($properties['base_url'])
             ->withQuery(http_build_query($query));
-        $uri = $uri->withPath($uri->getPath() . $properties['protocol'][$name]['path']);
 
-        return $uri;
+        return $uri->withPath($uri->getPath() . $properties['protocol'][$name]['path']);
     }
 
     /**
