@@ -18,7 +18,7 @@ class PCasExtension extends ConfigurableExtension
     ) {
         $loader = new YamlFileLoader(
             $container,
-            new FileLocator(__DIR__ . '/../../Resources/config')
+            new FileLocator(__DIR__.'/../../Resources/config')
         );
 
         $loader->load('p_cas.yml');

@@ -16,11 +16,11 @@ class PCasSerializerFactory implements PCasSerializerFactoryInterface
     {
         return new Serializer(
             [
-                new ObjectNormalizer()
+                new ObjectNormalizer(),
             ],
             [
                 new JsonEncoder(),
-                new XmlEncoder()
+                new XmlEncoder(),
             ]
         );
     }

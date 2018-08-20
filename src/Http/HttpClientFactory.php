@@ -52,11 +52,11 @@ class HttpClientFactory implements HttpClientFactoryInterface
     /**
      * HTTP Client factory constructor.
      *
-     * @param \Http\Client\HttpClient|NULL $httpClient
+     * @param \Http\Client\HttpClient|NULL      $httpClient
      *   The HTTP client.
      * @param \Http\Message\MessageFactory|NULL $messageFactory
      *   The message factory.
-     * @param \Http\Message\UriFactory|NULL $uriFactory
+     * @param \Http\Message\UriFactory|NULL     $uriFactory
      *   The URI factory.
      */
     public function __construct(

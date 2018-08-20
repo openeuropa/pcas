@@ -22,5 +22,4 @@ composer.lock
 !/demo/var/SymfonyRequirements.php
 /demo/vendor/
 /demo/web/bundles/
-.php_cs.cache
 /log/

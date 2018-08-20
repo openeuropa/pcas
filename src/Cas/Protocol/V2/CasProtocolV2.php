@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 class CasProtocolV2 extends AbstractCasProtocol
 {
     /**
+     * @todo: This will be fixed during upcoming refactoring.
+     * @SuppressWarnings(PHPMD)
+     *
      * {@inheritdoc}
      */
     public function validateServiceTicket($serviceTicket, $requestPgt = false, $url = null)

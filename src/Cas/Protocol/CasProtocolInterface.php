@@ -12,7 +12,7 @@ interface CasProtocolInterface
      * @param string $path
      *   The protocol endpoint. Could be login, logout, servicevalidate, etc.
      *   They are defined in config.yml.
-     * @param array $query
+     * @param array  $query
      *   The query parameters to add to the query.
      *
      * @return string|\Psr\Http\Message\UriInterface

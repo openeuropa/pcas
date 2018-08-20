@@ -59,13 +59,9 @@ abstract class AbstractCasProtocol implements CasProtocolInterface
     /**
      * AbstractCasProtocol constructor.
      *
-     * @param \OpenEuropa\pcas\Http\HttpClientInterface $client
      * @param \OpenEuropa\pcas\Security\Core\User\PCasUserFactoryInterface $PCasUserFactory
-     *   The user factory.
-     * @param \OpenEuropa\pcas\Utils\PCasSerializerFactoryInterface $serializerFactory
-     *   The serializer factory.
-     * @param \Http\Message\UriFactory|NULL $uriFactory
-     *   The URI factory.
+     * @param \OpenEuropa\pcas\Utils\PCasSerializerFactoryInterface        $serializerFactory
+     * @param \Http\Message\UriFactory|NULL                                $uriFactory
      */
     public function __construct(
         PCasUserFactoryInterface $PCasUserFactory,
@@ -148,7 +144,7 @@ abstract class AbstractCasProtocol implements CasProtocolInterface
             $request = Request::createFromGlobals();
             $request->getQueryString();
 
-            $url = $request->getSchemeAndHttpHost() . $request->getRequestUri();
+            $url = $request->getSchemeAndHttpHost().$request->getRequestUri();
         }
 
         $uri = $this->uriFactory->createUri($url);
