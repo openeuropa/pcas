@@ -2,9 +2,11 @@
 namespace OpenEuropa\pcas\Security;
 
 use OpenEuropa\pcas\PCas;
+use OpenEuropa\pcas\PCasFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\User;
@@ -24,11 +26,11 @@ class PCasGuardAuthenticator extends AbstractGuardAuthenticator
     /**
      * PCasGuardAuthenticator constructor.
      *
-     * @param \OpenEuropa\pcas\PCas $pcas
+     * @param \OpenEuropa\pcas\PCasFactory $PCasFactory
      */
-    public function __construct(PCas $pcas)
+    public function __construct(PCasFactory $PCasFactory)
     {
-        $this->pcas = $pcas;
+        $this->pcas = $PCasFactory->getPCas();
     }
 
     /**
