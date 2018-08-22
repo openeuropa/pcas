@@ -64,6 +64,8 @@ class PCasFactory
     }
 
     /**
+     * Returns the PCas object.
+     *
      * @throws InvalidArgumentException
      *  When no definitions are available
      * @throws ServiceCircularReferenceException
@@ -76,6 +78,7 @@ class PCasFactory
      */
     public function getPCas()
     {
+        /** @var \OpenEuropa\pcas\PCas $pcas */
         $pcas = $this->container->get('pcas');
         $pcas->setSession($this->getSession());
         return $pcas;

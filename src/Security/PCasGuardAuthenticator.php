@@ -26,11 +26,11 @@ class PCasGuardAuthenticator extends AbstractGuardAuthenticator
     /**
      * PCasGuardAuthenticator constructor.
      *
-     * @param \OpenEuropa\pcas\PCasFactory $PCasFactory
+     * @param \OpenEuropa\pcas\PCasFactory $pCasFactory
      */
-    public function __construct(PCasFactory $PCasFactory)
+    public function __construct(PCasFactory $pCasFactory)
     {
-        $this->pcas = $PCasFactory->getPCas();
+        $this->pcas = $pCasFactory->getPCas();
     }
 
     /**
