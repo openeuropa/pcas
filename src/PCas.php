@@ -70,7 +70,6 @@ class PCas implements LoggerAwareInterface
      *   The properties.
      * @param \OpenEuropa\pcas\Http\HttpClientInterface                  $client
      * @param \OpenEuropa\pcas\Cas\Protocol\CasProtocolInterface         $protocol
-     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
      * @param \Psr\SimpleCache\CacheInterface                            $cache
      * @param \Psr\Log\LoggerInterface|null                              $logger
      */
@@ -78,7 +77,6 @@ class PCas implements LoggerAwareInterface
         array $properties,
         HttpClientInterface $client,
         CasProtocolInterface $protocol,
-        SessionInterface $session,
         CacheInterface $cache = null,
         LoggerInterface $logger = null
     ) {
@@ -90,7 +88,6 @@ class PCas implements LoggerAwareInterface
                 $this->getHttpClient()
             )
         );
-        $this->setSession($session);
 
         if ($cache instanceof CacheInterface) {
             $this->setCache($cache);

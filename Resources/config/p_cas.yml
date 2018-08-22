@@ -27,7 +27,7 @@ parameters:
 services:
   pcas:
     class: OpenEuropa\pcas\PCas
-    arguments: ['%p_cas%', '@pcas.httpclient', '@pcas.protocol', '@session']
+    arguments: ['%p_cas%', '@pcas.httpclient', '@pcas.protocol']
     public: true
 
   pcas.httpclient:
@@ -47,6 +47,3 @@ services:
 
   pcas.httpclientfactory:
     class: OpenEuropa\pcas\Http\HttpClientFactory
-
-  session:
-    synthetic: true

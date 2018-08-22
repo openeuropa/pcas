@@ -37,8 +37,8 @@ class PCasFactory
         $this->container = new ContainerBuilder();
         $loader = new YamlFileLoader($this->container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('p_cas.yml');
-        $this->container->set('session', $session);
 
+        $this->container->set('session', $session);
         $configuration = $this->container->getParameter('p_cas');
         if (!empty($baseUrl)) {
             $configuration['base_url'] = $baseUrl;
@@ -64,6 +64,8 @@ class PCasFactory
     }
 
     /**
+     * Returns the PCas object.
+     *
      * @throws InvalidArgumentException
      *  When no definitions are available
      * @throws ServiceCircularReferenceException
@@ -76,7 +78,10 @@ class PCasFactory
      */
     public function getPCas()
     {
-        return $this->container->get('pcas');
+        /** @var \OpenEuropa\pcas\PCas $pcas */
+        $pcas = $this->container->get('pcas');
+        $pcas->setSession($this->getSession());
+        return $pcas;
     }
 
     /**

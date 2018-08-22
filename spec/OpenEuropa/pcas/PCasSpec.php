@@ -49,14 +49,14 @@ class PCasSpec extends ObjectBehavior
             new PCasUserFactory(),
             new PCasSerializerFactory());
 
-        $session = new Session();
 
         $this->beConstructedWith(
             $this->getProperties(),
             $client,
-            $protocol,
-            $session
+            $protocol
         );
+
+        $this->setSession(new Session());
     }
 
     /**
