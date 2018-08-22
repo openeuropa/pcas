@@ -5,7 +5,6 @@
   "license": "EUPL-1.2",
   "require": {
     "ext-simplexml": "*",
-    "php" : "^7.0 || ^7.1 || ^7.2",
     "php-http/httplug": "^1.1",
     "php-http/discovery": "^1.4",
     "php-http/client-common": "^1.7",
@@ -21,7 +20,7 @@
   "require-dev": {
     "drupol/phpspec-annotation": "^1.0",
     "openeuropa/code-review": "^1.0@alpha",
-    "phpspec/phpspec": "^4.3",
+    "phpspec/phpspec": "^3.4|^4.3|^5.0",
     "php-http/guzzle6-adapter": "^1.1",
     "scrutinizer/ocular": "^1.4",
     "sebastian/phpcpd": "^3.0",
