@@ -60,6 +60,10 @@ Both parameters are optional, although you'll surely want to set `base_url` to a
 
 ## Demo
 
+Copy docker-compose.yml.dist into docker-compose.yml.
+
+You can make any alterations you need for your local Docker setup. However, the defaults should be enough to set the project up.
+
 The pCAS library is bundled with two independent Symfony app:
 
 * demo-client: A basic web app that can authenticate to a CAS server to access specific pages.

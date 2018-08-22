@@ -5,6 +5,7 @@ ecasclient.log
 **/Properties/config.json
 /vendor
 composer.lock
+docker-compose.yml
 /demo/.web-server-pid
 /demo/app/config/parameters.yml
 /demo/build/
