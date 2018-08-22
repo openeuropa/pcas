@@ -43,7 +43,7 @@ class PCasFactory
         if (!empty($baseUrl)) {
             $configuration['base_url'] = $baseUrl;
         }
-        if (!empty($protocols)) {
+        if (!empty($protocol)) {
             $configuration['protocol'] = $protocol;
         }
         $this->container->setParameter('p_cas', $configuration);
