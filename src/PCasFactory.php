@@ -32,7 +32,7 @@ class PCasFactory
      *
      * @throws \Exception
      */
-    public function __construct(SessionInterface $session, string $baseUrl = '', array $protocol = [])
+    public function __construct(SessionInterface $session, $baseUrl = '', array $protocol = [])
     {
         $this->container = new ContainerBuilder();
         $loader = new YamlFileLoader($this->container, new FileLocator(__DIR__ . '/../Resources/config'));

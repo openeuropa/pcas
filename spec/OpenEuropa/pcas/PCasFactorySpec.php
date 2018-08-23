@@ -16,19 +16,11 @@ class PCasFactorySpec extends ObjectBehavior
         );
     }
 
-    /**
-     * @name I can initialize it.
-     */
     public function it_is_initializable()
     {
         $this->shouldHaveType(PCasFactory::class);
     }
 
-    /**
-     * @name I can generate a pcas object.
-     *
-     * @throws \Exception
-     */
     public function it_can_generate_pcas()
     {
         $pcas = $this->getPCas();
@@ -67,11 +59,6 @@ class PCasFactorySpec extends ObjectBehavior
         ]);
     }
 
-    /**
-     * @name I can use an external session object.
-     *
-     * @throws \Exception
-     */
     public function it_can_use_an_external_session_object()
     {
         $session = new Session();
@@ -81,11 +68,6 @@ class PCasFactorySpec extends ObjectBehavior
         $this->getSession()->getName()->shouldBe('My session');
     }
 
-    /**
-     * @name I can generate a customized pcas object.
-     *
-     * @throws \Exception
-     */
     public function it_can_generate_custom_pcas()
     {
         $session = new Session();

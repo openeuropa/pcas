@@ -64,9 +64,15 @@ class HttpClientFactory implements HttpClientFactoryInterface
         MessageFactory $messageFactory = null,
         UriFactory $uriFactory = null
     ) {
-        $this->httpClient = $httpClient ?? HttpClientDiscovery::find();
-        $this->messageFactory = $messageFactory ?? MessageFactoryDiscovery::find();
-        $this->uriFactory = $uriFactory ?? UriFactoryDiscovery::find();
+        $this->httpClient = $httpClient ?
+            $httpClient :
+            HttpClientDiscovery::find();
+        $this->messageFactory = $messageFactory ?
+            $messageFactory :
+            MessageFactoryDiscovery::find();
+        $this->uriFactory = $uriFactory ?
+            $uriFactory :
+            UriFactoryDiscovery::find();
     }
 
     /**
