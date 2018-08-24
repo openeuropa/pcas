@@ -1,5 +1,5 @@
 {
-  "name": "OpenEuropa/pcas",
+  "name": "openeuropa/pcas",
   "description": "pCas, a PHP CAS library",
   "type": "library",
   "license": "EUPL-1.2",
@@ -8,9 +8,9 @@
     "php-http/httplug": "^1.1",
     "php-http/discovery": "^1.4",
     "php-http/client-common": "^1.7",
-    "symfony/config": "~2.2|^3|^4.0",
+    "symfony/config": "~2.2|^3.4|^4.0",
     "symfony/dependency-injection": "^v3.4|^4.0",
-    "symfony/http-foundation": "v3.4|^4.0",
+    "symfony/http-foundation": "^v3.4|^4.0",
     "symfony/security": "^v3.4|^4.0",
     "symfony/serializer": "^v3.4|^4.0",
     "symfony/yaml": "^v3.4|^4.0",
