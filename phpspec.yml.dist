@@ -1,3 +1,0 @@
-formatter.name: pretty
-extensions:
-  drupol\PhpspecAnnotation\PhpspecAnnotation: ~

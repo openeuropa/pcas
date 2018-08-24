@@ -59,17 +59,11 @@ class PCasSpec extends ObjectBehavior
         $this->setSession(new Session());
     }
 
-    /**
-     * @name I can initialize it.
-     */
     public function it_is_initializable()
     {
         $this->shouldHaveType(PCas::class);
     }
 
-    /**
-     * @name I can login.
-     */
     public function it_can_login()
     {
         $properties = $this->getProperties();
@@ -81,9 +75,6 @@ class PCasSpec extends ObjectBehavior
         $this->login()->getStatusCode()->shouldBe(302);
     }
 
-    /**
-     * @name I can logout.
-     */
     public function it_can_logout()
     {
         $properties = $this->getProperties();

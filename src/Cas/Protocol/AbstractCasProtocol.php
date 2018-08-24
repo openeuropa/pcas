@@ -70,7 +70,9 @@ abstract class AbstractCasProtocol implements CasProtocolInterface
     ) {
         $this->userFactory = $PCasUserFactory;
         $this->serializerFactory = $serializerFactory;
-        $this->uriFactory = $uriFactory ?? UriFactoryDiscovery::find();
+        $this->uriFactory = $uriFactory ?
+            $uriFactory :
+            UriFactoryDiscovery::find();
     }
 
     /**
