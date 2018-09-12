@@ -1,5 +1,6 @@
 # pCAS library
 [![Build Status](https://drone.fpfis.eu/api/badges/openeuropa/pcas/status.svg)](https://drone.fpfis.eu/openeuropa/pcas/)
+[![Packagist](https://img.shields.io/packagist/v/openeuropa/pcas.svg)](https://packagist.org/packages/openeuropa/pcas)
 
 pCAS, a CAS library for PHP.
 
@@ -59,6 +60,11 @@ $pcas = $factory->getPCas();
 Both parameters are optional, although you'll surely want to set `base_url` to a different value.
 
 ## Demo
+
+Requirements:
+
+- [Docker](https://www.docker.com/get-docker)
+- [Docker-compose](https://docs.docker.com/compose/)
 
 Copy docker-compose.yml.dist into docker-compose.yml.
 
