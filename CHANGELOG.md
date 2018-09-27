@@ -1,5 +1,23 @@
 # Change Log
 
+## [0.2.2](https://github.com/openeuropa/pcas/tree/0.2.2) (2018-09-27)
+[Full Changelog](https://github.com/openeuropa/pcas/compare/0.2.1...0.2.2)
+
+**Closed issues:**
+
+- Demo server and client not compatible with PHP 5.6 [\#6](https://github.com/openeuropa/pcas/issues/6)
+
+**Merged pull requests:**
+
+-  OPENEUROPA-1215: Relax dependencies on composer.json. [\#30](https://github.com/openeuropa/pcas/pull/30) ([voidtek](https://github.com/voidtek))
+
+## [0.2.1](https://github.com/openeuropa/pcas/tree/0.2.1) (2018-08-24)
+[Full Changelog](https://github.com/openeuropa/pcas/compare/0.2.0...0.2.1)
+
+**Merged pull requests:**
+
+- OPENEUROPA-756: Fix PHP 5.6 compatibility [\#29](https://github.com/openeuropa/pcas/pull/29) ([voidtek](https://github.com/voidtek))
+
 ## [0.2.0](https://github.com/openeuropa/pcas/tree/0.2.0) (2018-08-22)
 [Full Changelog](https://github.com/openeuropa/pcas/compare/0.1.1...0.2.0)
 
@@ -9,6 +27,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md for 0.2.0 release [\#28](https://github.com/openeuropa/pcas/pull/28) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-1171: Remove session from pcas service [\#27](https://github.com/openeuropa/pcas/pull/27) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-1119: Create a docker-compose.yml.dist file [\#26](https://github.com/openeuropa/pcas/pull/26) ([netlooker](https://github.com/netlooker))
 - OPENEUROPA-759: Follow-up, update code syntax. [\#25](https://github.com/openeuropa/pcas/pull/25) ([drupol](https://github.com/drupol))
